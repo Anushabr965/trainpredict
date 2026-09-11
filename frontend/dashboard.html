@@ -11,7 +11,7 @@
     <title>Live Train Dashboard | RailPredict</title>
 
     <link rel="stylesheet"
-          href="css/style.css">
+          href="style.css">
 
 </head>
 
@@ -117,6 +117,7 @@
 
 
     <!-- Search -->
+     <div class="search-box">
 
     <input
         type="text"
@@ -124,6 +125,12 @@
         class="search-box"
         placeholder="Search train number or train name..."
     >
+        <button onclick="searchTrain()">search</button>
+        <button onclick="loadTrains()">showall</button>
+        <div>
+
+        
+    
 
 
     <!-- Train table -->
@@ -169,7 +176,7 @@
 </div>
 
 
-<script src="js/dashboard.js"></script>
+<script src="dashboard.js"></script>
 
 </body>
 
