@@ -1,0 +1,1 @@
+console.log("RailPredict frontend loaded successfully.");

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Live Train Dashboard | RailPredict</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        🚆 RailPredict
+    </div>
+
+    <div class="nav-links">
+
+        <a href="index.html">Home</a>
+
+        <a href="dashboard.html">
+            Live Trains
+        </a>
+
+        <a href="analytics.html">
+            Analytics
+        </a>
+
+        <a href="control-room.html">
+            Control Room
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<div class="dashboard-container">
+
+    <div class="page-title">
+
+        <p class="tag">
+            LIVE MONITORING
+        </p>
+
+        <h1>
+            Train ETA Dashboard
+        </h1>
+
+        <p>
+            Monitor train movement and dynamically predicted arrival times.
+        </p>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+
+            <p>Active Trains</p>
+
+            <h3 id="activeTrains">
+                128
+            </h3>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <p>On Time</p>
+
+            <h3 id="onTime">
+                94
+            </h3>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <p>Delayed</p>
+
+            <h3 id="delayed">
+                26
+            </h3>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <p>Critical Alerts</p>
+
+            <h3 id="alerts">
+                8
+            </h3>
+
+        </div>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <input
+        type="text"
+        id="trainSearch"
+        class="search-box"
+        placeholder="Search train number or train name..."
+    >
+
+
+    <!-- Train table -->
+
+    <div class="train-table-container">
+
+        <h2>Live Train Status</h2>
+
+
+        <table class="train-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Train</th>
+
+                    <th>Route</th>
+
+                    <th>Current Station</th>
+
+                    <th>Speed</th>
+
+                    <th>Delay</th>
+
+                    <th>Predicted ETA</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="trainTableBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
