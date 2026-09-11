@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# VS Code
+.vscode/
+
+# Database
+*.db
+
+# Machine Learning
+*.pkl
+
+# OS
+.DS_Store
+Thumbs.db
