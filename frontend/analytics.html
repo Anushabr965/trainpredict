@@ -48,6 +48,9 @@
 
 <div class="dashboard-container">
 
+
+    <!-- PAGE TITLE -->
+
     <div class="page-title">
 
         <p class="tag">
@@ -64,6 +67,8 @@
 
     </div>
 
+
+    <!-- DASHBOARD STATISTICS -->
 
     <div class="dashboard-cards">
 
@@ -105,6 +110,8 @@
     </div>
 
 
+    <!-- MAJOR DELAY FACTORS -->
+
     <div class="train-table-container">
 
         <h2>Major Delay Factors</h2>
@@ -114,38 +121,248 @@
         <table class="train-table">
 
             <tr>
+
                 <th>Factor</th>
+
                 <th>Impact</th>
+
                 <th>Frequency</th>
+
             </tr>
 
+
             <tr>
+
                 <td>Track Congestion</td>
+
                 <td>High</td>
+
                 <td>32%</td>
+
             </tr>
 
+
             <tr>
+
                 <td>Previous Station Delay</td>
+
                 <td>High</td>
+
                 <td>28%</td>
+
             </tr>
 
+
             <tr>
+
                 <td>Weather Conditions</td>
+
                 <td>Medium</td>
+
                 <td>16%</td>
+
             </tr>
 
+
             <tr>
+
                 <td>Station Congestion</td>
+
                 <td>Medium</td>
+
                 <td>14%</td>
+
             </tr>
 
         </table>
 
     </div>
+
+
+    <!-- ML MODEL PERFORMANCE COMPARISON -->
+
+    <div class="train-table-container">
+
+        <h2>
+            ML Model Performance Comparison
+        </h2>
+
+        <br>
+
+        <p>
+            Comparison of different machine learning models
+            for train ETA prediction.
+        </p>
+
+        <br>
+
+
+        <table class="train-table">
+
+            <tr>
+
+                <th>Model</th>
+
+                <th>MAE</th>
+
+                <th>RMSE</th>
+
+                <th>Accuracy ±10 min</th>
+
+            </tr>
+
+
+            <!-- BASELINE -->
+
+            <tr>
+
+                <td>
+                    Schedule-based Baseline
+                </td>
+
+                <td>
+                    To be measured
+                </td>
+
+                <td>
+                    To be measured
+                </td>
+
+                <td>
+                    To be measured
+                </td>
+
+            </tr>
+
+
+            <!-- LINEAR REGRESSION -->
+
+            <tr>
+
+                <td>
+                    <strong>
+                        Linear Regression
+                    </strong>
+                </td>
+
+                <td>
+                    <strong>
+                        0.81 min
+                    </strong>
+                </td>
+
+                <td>
+                    <strong>
+                        1.07 min
+                    </strong>
+                </td>
+
+                <td>
+                    <strong>
+                        100%
+                    </strong>
+                </td>
+
+            </tr>
+
+
+            <!-- RANDOM FOREST -->
+
+            <tr>
+
+                <td>
+                    Random Forest
+                </td>
+
+                <td>
+                    5.73 min
+                </td>
+
+                <td>
+                    8.17 min
+                </td>
+
+                <td>
+                    75%
+                </td>
+
+            </tr>
+
+
+            <!-- GRADIENT BOOSTING -->
+
+            <tr>
+
+                <td>
+                    Gradient Boosting
+                </td>
+
+                <td>
+                    3.73 min
+                </td>
+
+                <td>
+                    5.33 min
+                </td>
+
+                <td>
+                    100%
+                </td>
+
+            </tr>
+
+        </table>
+
+
+        <br>
+
+
+        <!-- BEST MODEL -->
+
+        <p>
+
+            <strong>
+                Best Model:
+            </strong>
+
+            Linear Regression
+
+        </p>
+
+
+        <br>
+
+
+        <p>
+
+            On the current prototype dataset,
+            Linear Regression achieved the lowest
+            MAE of 0.81 minutes.
+
+        </p>
+
+
+        <br>
+
+
+        <!-- DATASET DISCLAIMER -->
+
+        <p>
+
+            <small>
+
+                Note: These are preliminary results
+                obtained using a simulated prototype
+                dataset. The model will be retrained
+                and validated using larger real-world
+                railway operational datasets.
+
+            </small>
+
+        </p>
+
+    </div>
+
 
 </div>
 

@@ -1,11 +1,7 @@
 const API_URL = "http://127.0.0.1:8000";
 
-
-// Load all trains when the page opens
 async function loadTrains() {
-
     try {
-
         const response = await fetch(`${API_URL}/trains`);
 
         if (!response.ok) {
@@ -16,10 +12,38 @@ async function loadTrains() {
 
         console.log("Train data received:", data);
 
-        displayTrains(data.trains);
+        const trainsWithETA = await Promise.all(
+            data.trains.map(async (train) => {
+
+                try {
+                    const etaResponse = await fetch(
+                        `${API_URL}/trains/${train.train_number}/eta`
+                    );
+
+                    const etaData = await etaResponse.json();
+
+                    return {
+                        ...train,
+                        predicted_eta: etaData.predicted_eta_minutes
+                    };
+
+                } catch (error) {
+                    console.error(
+                        `ETA error for train ${train.train_number}:`,
+                        error
+                    );
+
+                    return {
+                        ...train,
+                        predicted_eta: "N/A"
+                    };
+                }
+            })
+        );
+
+        displayTrains(trainsWithETA);
 
     } catch (error) {
-
         console.error("Error loading trains:", error);
 
         const tableBody = document.getElementById("trainTableBody");
@@ -35,7 +59,6 @@ async function loadTrains() {
 }
 
 
-// Display trains in the table
 function displayTrains(trains) {
 
     const tableBody = document.getElementById("trainTableBody");
@@ -48,12 +71,20 @@ function displayTrains(trains) {
 
         row.innerHTML = `
             <td>${train.train_number}</td>
+
             <td>${train.train_name}</td>
+
             <td>${train.current_station}</td>
+
             <td>${train.next_station}</td>
+
             <td>${train.speed_kmh} km/h</td>
+
             <td>${train.delay} min</td>
-            <td>${train.eta}</td>
+
+            <td>
+                ${train.predicted_eta} min
+            </td>
         `;
 
         tableBody.appendChild(row);
@@ -61,7 +92,6 @@ function displayTrains(trains) {
 }
 
 
-// Search for a specific train
 async function searchTrain() {
 
     const searchInput = document.getElementById("trainSearch");
@@ -90,7 +120,13 @@ async function searchTrain() {
 
         const train = await response.json();
 
-        console.log("Train found:", train);
+        const etaResponse = await fetch(
+            `${API_URL}/trains/${trainNumber}/eta`
+        );
+
+        const etaData = await etaResponse.json();
+
+        train.predicted_eta = etaData.predicted_eta_minutes;
 
         displayTrains([train]);
 
@@ -103,5 +139,5 @@ async function searchTrain() {
 }
 
 
-// Load trains when dashboard opens
+// Load trains when page opens
 loadTrains();
