@@ -1,21 +1,40 @@
 from fastapi import APIRouter, HTTPException
-from services.eta_service import calculate_eta
+import joblib
+import pandas as pd
+from pathlib import Path
+
 from routes.trains import trains
 
 router = APIRouter()
 
+# Load trained ML model
+
+BASE_DIR = Path(__file__).resolve().parents[2]
+MODEL_PATH = BASE_DIR / "ml_model" / "linear_regression_model.pkl"
+
+model = joblib.load(MODEL_PATH)
+
+
 @router.get("/trains/{train_number}/eta")
 def get_train_eta(train_number: str):
 
+    # Find train
     for train in trains:
 
         if train["train_number"] == train_number:
 
-            predicted_eta = calculate_eta(
-                train["distance_km"],
-                train["speed_kmh"],
-                train["delay"]
-            )
+            # Prepare input for ML model
+            input_data = pd.DataFrame([{
+                "distance_km": train["distance_km"],
+                "speed_kmh": train["speed_kmh"],
+                "current_delay": train["delay"],
+                "scheduled_time_minutes": 25,
+                "weather_factor": 0,
+                "congestion_level": 1
+            }])
+
+            # Predict ETA
+            predicted_eta = model.predict(input_data)[0]
 
             return {
                 "train_number": train["train_number"],
@@ -23,7 +42,8 @@ def get_train_eta(train_number: str):
                 "distance_km": train["distance_km"],
                 "speed_kmh": train["speed_kmh"],
                 "current_delay": train["delay"],
-                "predicted_eta_minutes": predicted_eta
+                "predicted_eta_minutes": round(float(predicted_eta), 2),
+                "prediction_method": "Linear Regression ML"
             }
 
     raise HTTPException(
