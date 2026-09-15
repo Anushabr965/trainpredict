@@ -90,6 +90,87 @@ const FALLBACK_TRAINS = [
         speed_kmh: 43,
         delay: 11,
         predicted_eta: 26
+    },
+    {
+        train_number: "22209",
+        train_name: "Bangalore Express",
+        current_station: "Bengaluru City",
+        next_station: "Tumakuru",
+        speed_kmh: 71,
+        delay: 8,
+        predicted_eta: 21
+    },
+    {
+        train_number: "20627",
+        train_name: "Swarna Jayanti",
+        current_station: "Chikkamagaluru",
+        next_station: "Bengaluru City",
+        speed_kmh: 54,
+        delay: 13,
+        predicted_eta: 30
+    },
+    {
+        train_number: "19305",
+        train_name: "Gorakhpur SF",
+        current_station: "Yesvantpur",
+        next_station: "Gubbi",
+        speed_kmh: 62,
+        delay: 14,
+        predicted_eta: 40
+    },
+    {
+        train_number: "22814",
+        train_name: "Sampoorna Kranti",
+        current_station: "Mysuru Junction",
+        next_station: "Bengaluru City",
+        speed_kmh: 69,
+        delay: 7,
+        predicted_eta: 24
+    },
+    {
+        train_number: "20777",
+        train_name: "Mysuru Sampark Kranti",
+        current_station: "Krishnarajapuram",
+        next_station: "Mysuru Junction",
+        speed_kmh: 59,
+        delay: 6,
+        predicted_eta: 19
+    },
+    {
+        train_number: "13049",
+        train_name: "Kashi Express",
+        current_station: "Bengaluru Cantonment",
+        next_station: "Katpadi",
+        speed_kmh: 48,
+        delay: 17,
+        predicted_eta: 47
+    },
+    {
+        train_number: "16382",
+        train_name: "Mysuru - Hubballi Fast",
+        current_station: "KSR Bengaluru",
+        next_station: "Hassan",
+        speed_kmh: 64,
+        delay: 10,
+        predicted_eta: 27
+    },
+    {
+        train_number: "22503",
+        train_name: "Namma Bengaluru",
+        current_station: "Bengaluru City",
+        next_station: "Hosur",
+        speed_kmh: 75,
+        delay: 2,
+        predicted_eta: 14
+    },
+    {
+        train_number: "19019",
+        train_name: "Kaveri Express",
+        current_station: "Mysuru Junction",
+        next_station: "Bengaluru City",
+        speed_kmh: 55,
+        delay: 9,
+        predicted_eta: 29
     }
 ];
 

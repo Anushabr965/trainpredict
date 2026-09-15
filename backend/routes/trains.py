@@ -103,6 +103,96 @@ trains = [
         "speed_kmh": 43,
         "delay": 11,
         "eta": "09:40 AM"
+    },
+    {
+        "train_number": "22209",
+        "train_name": "Bangalore Express",
+        "current_station": "Bengaluru City",
+        "next_station": "Tumakuru",
+        "distance_km": 68,
+        "speed_kmh": 71,
+        "delay": 8,
+        "eta": "10:30 AM"
+    },
+    {
+        "train_number": "20627",
+        "train_name": "Swarna Jayanti",
+        "current_station": "Chikkamagaluru",
+        "next_station": "Bengaluru City",
+        "distance_km": 210,
+        "speed_kmh": 54,
+        "delay": 13,
+        "eta": "01:05 PM"
+    },
+    {
+        "train_number": "19305",
+        "train_name": "Gorakhpur SF",
+        "current_station": "Yesvantpur",
+        "next_station": "Gubbi",
+        "distance_km": 510,
+        "speed_kmh": 62,
+        "delay": 14,
+        "eta": "02:40 PM"
+    },
+    {
+        "train_number": "22814",
+        "train_name": "Sampoorna Kranti",
+        "current_station": "Mysuru Junction",
+        "next_station": "Bengaluru City",
+        "distance_km": 140,
+        "speed_kmh": 69,
+        "delay": 7,
+        "eta": "11:48 AM"
+    },
+    {
+        "train_number": "20777",
+        "train_name": "Mysuru Sampark Kranti",
+        "current_station": "Krishnarajapuram",
+        "next_station": "Mysuru Junction",
+        "distance_km": 120,
+        "speed_kmh": 59,
+        "delay": 6,
+        "eta": "11:10 AM"
+    },
+    {
+        "train_number": "13049",
+        "train_name": "Kashi Express",
+        "current_station": "Bengaluru Cantonment",
+        "next_station": "Katpadi",
+        "distance_km": 314,
+        "speed_kmh": 48,
+        "delay": 17,
+        "eta": "01:55 PM"
+    },
+    {
+        "train_number": "16382",
+        "train_name": "Mysuru - Hubballi Fast",
+        "current_station": "KSR Bengaluru",
+        "next_station": "Hassan",
+        "distance_km": 193,
+        "speed_kmh": 64,
+        "delay": 10,
+        "eta": "12:15 PM"
+    },
+    {
+        "train_number": "22503",
+        "train_name": "Namma Bengaluru",
+        "current_station": "Bengaluru City",
+        "next_station": "Hosur",
+        "distance_km": 49,
+        "speed_kmh": 75,
+        "delay": 2,
+        "eta": "09:52 AM"
+    },
+    {
+        "train_number": "19019",
+        "train_name": "Kaveri Express",
+        "current_station": "Mysuru Junction",
+        "next_station": "Bengaluru City",
+        "distance_km": 130,
+        "speed_kmh": 55,
+        "delay": 9,
+        "eta": "11:20 AM"
     }
 ]
 
