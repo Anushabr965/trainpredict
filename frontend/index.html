@@ -12,21 +12,13 @@
     <link rel="stylesheet" href="ui/ux.css">
     <link rel="stylesheet" href="style.css">
 
-    <!-- =====================================================
-         LEAFLET MAP CSS
-    ====================================================== -->
-
+    <!-- Leaflet Map CSS -->
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     >
 
-
     <style>
-
-        /* =====================================================
-           GENERAL
-        ===================================================== */
 
         * {
             box-sizing: border-box;
@@ -40,9 +32,8 @@
             margin: 0;
         }
 
-
         /* =====================================================
-           DIFFERENT BACKGROUNDS
+           SECTION BACKGROUNDS
         ===================================================== */
 
         #home {
@@ -56,7 +47,6 @@
                 url("https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=2000&q=85")
                 center / cover fixed no-repeat;
         }
-
 
         #live-trains {
             min-height: 100vh;
@@ -73,7 +63,6 @@
             padding-bottom: 80px;
         }
 
-
         #analytics {
             min-height: 100vh;
 
@@ -89,7 +78,6 @@
             padding-bottom: 80px;
         }
 
-
         #control-room {
             min-height: 100vh;
 
@@ -104,7 +92,6 @@
             padding-top: 100px;
             padding-bottom: 80px;
         }
-
 
         /* =====================================================
            NAVIGATION
@@ -122,14 +109,13 @@
 
             background: rgba(3, 10, 20, 0.78);
 
-            border-bottom: 1px solid rgba(255,255,255,0.12);
+            border-bottom:
+                1px solid rgba(255,255,255,0.12);
         }
-
 
         .nav-links a {
             cursor: pointer;
         }
-
 
         /* =====================================================
            SECTION CONTAINER
@@ -139,62 +125,43 @@
             position: relative;
         }
 
-
         .section-inner {
             width: 90%;
             max-width: 1400px;
-
             margin: auto;
         }
 
-
         /* =====================================================
-           PAGE TITLES
+           TITLES
         ===================================================== */
 
         .custom-page-title {
             text-align: center;
-
             margin-bottom: 45px;
-
             color: white;
         }
 
-
         .custom-page-title .tag {
             letter-spacing: 3px;
-
             font-size: 13px;
-
             font-weight: 700;
-
             color: #66d9ff;
-
             margin-bottom: 10px;
         }
 
-
         .custom-page-title h1 {
             font-size: clamp(32px, 5vw, 58px);
-
             margin: 0 0 15px;
-
             font-weight: 800;
         }
 
-
         .custom-page-title p {
             font-size: 17px;
-
             opacity: 0.85;
-
             margin: 0 auto;
-
             max-width: 700px;
-
             line-height: 1.7;
         }
-
 
         /* =====================================================
            DASHBOARD CARDS
@@ -210,7 +177,6 @@
 
             margin-bottom: 30px;
         }
-
 
         .custom-dashboard-card {
             padding: 28px;
@@ -235,14 +201,12 @@
                 background 0.3s ease;
         }
 
-
         .custom-dashboard-card:hover {
             transform: translateY(-6px);
 
             background:
                 rgba(255,255,255,0.14);
         }
-
 
         .custom-dashboard-card p {
             margin: 0 0 10px;
@@ -252,7 +216,6 @@
             font-size: 14px;
         }
 
-
         .custom-dashboard-card h3 {
             margin: 0;
 
@@ -261,14 +224,12 @@
             color: #ffffff;
         }
 
-
         .custom-dashboard-card .green {
             color: #4ade80;
         }
 
-
         /* =====================================================
-           TABLE CONTAINER
+           TABLE
         ===================================================== */
 
         .custom-table-container {
@@ -296,29 +257,21 @@
             margin-bottom: 30px;
         }
 
-
         .custom-table-container h2 {
             margin-top: 0;
-
             font-size: 25px;
         }
 
-
         .custom-table-container p {
             line-height: 1.7;
-
             opacity: 0.85;
         }
 
-
         .custom-table {
             width: 100%;
-
             border-collapse: collapse;
-
             min-width: 650px;
         }
-
 
         .custom-table th {
             text-align: left;
@@ -333,25 +286,23 @@
             color: #8fe5ff;
         }
 
-
         .custom-table td {
             padding: 16px 14px;
 
             border-bottom:
                 1px solid rgba(255,255,255,0.08);
 
-            color: rgba(255,255,255,0.88);
+            color:
+                rgba(255,255,255,0.88);
         }
-
 
         .custom-table tr:hover td {
             background:
                 rgba(255,255,255,0.04);
         }
 
-
         /* =====================================================
-           TRAIN ROUTE MAP
+           MAP
         ===================================================== */
 
         #trainMap {
@@ -364,7 +315,6 @@
 
             overflow: hidden;
         }
-
 
         /* =====================================================
            SEARCH
@@ -379,7 +329,6 @@
 
             flex-wrap: wrap;
         }
-
 
         .custom-search input {
             flex: 1;
@@ -401,11 +350,10 @@
             outline: none;
         }
 
-
         .custom-search input::placeholder {
-            color: rgba(255,255,255,0.55);
+            color:
+                rgba(255,255,255,0.55);
         }
-
 
         .custom-search button {
             padding: 14px 22px;
@@ -425,17 +373,91 @@
             transition: 0.25s;
         }
 
-
         .custom-search button:hover {
             transform: translateY(-2px);
-
             opacity: 0.9;
         }
 
-
         /* =====================================================
-           STATUS
+           CONTROL ROOM
         ===================================================== */
+
+        .control-input-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .control-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .control-input-group label {
+            color: #8fe5ff;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .control-input-group input,
+        .control-input-group select {
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid rgba(255,255,255,0.18);
+
+            background: #102033;
+
+            color: white;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        .control-button {
+            padding: 14px 25px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #38bdf8;
+
+            color: #06111c;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-bottom: 20px;
+        }
+
+        .control-analysis {
+            padding: 20px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid rgba(255,255,255,0.1);
+
+            margin-bottom: 25px;
+        }
+
+        .control-analysis p {
+            margin: 7px 0;
+        }
 
         .status {
             display: inline-block;
@@ -449,20 +471,47 @@
             font-weight: 700;
         }
 
-
         .status.warning {
-            background: rgba(250, 204, 21, 0.15);
+            background:
+                rgba(250, 204, 21, 0.15);
 
             color: #fde047;
         }
 
-
         .status.delayed {
-            background: rgba(248, 113, 113, 0.15);
+            background:
+                rgba(248, 113, 113, 0.15);
 
             color: #f87171;
         }
 
+        .status.critical {
+            background:
+                rgba(239, 68, 68, 0.18);
+
+            color: #f87171;
+        }
+
+        .prototype-note {
+            margin-top: 15px;
+
+            padding: 14px 18px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(56,189,248,0.08);
+
+            border:
+                1px solid rgba(56,189,248,0.2);
+
+            color:
+                rgba(255,255,255,0.75);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
 
         /* =====================================================
            RESPONSIVE
@@ -475,8 +524,11 @@
                     repeat(2, minmax(0, 1fr));
             }
 
-        }
+            .control-input-grid {
+                grid-template-columns: 1fr;
+            }
 
+        }
 
         @media (max-width: 600px) {
 
@@ -484,16 +536,13 @@
                 grid-template-columns: 1fr;
             }
 
-
             .custom-table-container {
                 padding: 20px;
             }
 
-
             .custom-page-title h1 {
                 font-size: 34px;
             }
-
 
             #trainMap {
                 height: 400px;
@@ -519,7 +568,6 @@
         🚆 RailPredict
     </div>
 
-
     <div class="nav-links">
 
         <a href="#home">
@@ -543,7 +591,6 @@
 </nav>
 
 
-
 <!-- =========================================================
      HOME
 ========================================================= -->
@@ -558,7 +605,6 @@
                 SMART RAILWAY ETA SYSTEM
             </p>
 
-
             <h1>
 
                 Dynamic Forecast of
@@ -569,7 +615,6 @@
 
             </h1>
 
-
             <p class="hero-description">
 
                 Predict accurate train arrival times using live train
@@ -577,7 +622,6 @@
                 machine learning.
 
             </p>
-
 
             <div class="hero-buttons">
 
@@ -587,7 +631,6 @@
                     View Live Trains
 
                 </a>
-
 
                 <a href="#analytics"
                    class="btn secondary-btn">
@@ -607,11 +650,9 @@
                 🚆
             </div>
 
-
             <h3>
                 Dynamic ETA Prediction
             </h3>
-
 
             <p>
 
@@ -619,7 +660,6 @@
                 based on changing railway conditions.
 
             </p>
-
 
             <div class="prediction">
 
@@ -634,7 +674,6 @@
                     </strong>
 
                 </div>
-
 
                 <div>
 
@@ -661,7 +700,6 @@
             How RailPredict Works
         </h2>
 
-
         <p class="section-description">
 
             Our system combines railway data and machine learning
@@ -671,7 +709,6 @@
 
 
         <div class="feature-grid">
-
 
             <div class="feature-card">
 
@@ -752,7 +789,6 @@
 
             </div>
 
-
         </div>
 
     </section>
@@ -763,11 +799,11 @@
         <div class="stat">
 
             <h2>
-                150+
+                19
             </h2>
 
             <p>
-                Trains Monitored
+                Demo Trains
             </p>
 
         </div>
@@ -776,11 +812,11 @@
         <div class="stat">
 
             <h2>
-                95%
+                ML
             </h2>
 
             <p>
-                Prediction Accuracy
+                ETA Prediction
             </p>
 
         </div>
@@ -825,7 +861,6 @@
 </section>
 
 
-
 <!-- =========================================================
      LIVE TRAINS
 ========================================================= -->
@@ -853,7 +888,6 @@
         </div>
 
 
-
         <div class="custom-dashboard-cards">
 
 
@@ -864,7 +898,7 @@
                 </p>
 
                 <h3 id="activeTrains">
-                    128
+                    0
                 </h3>
 
             </div>
@@ -877,7 +911,7 @@
                 </p>
 
                 <h3 id="onTime">
-                    94
+                    0
                 </h3>
 
             </div>
@@ -890,7 +924,7 @@
                 </p>
 
                 <h3 id="delayed">
-                    26
+                    0
                 </h3>
 
             </div>
@@ -903,13 +937,12 @@
                 </p>
 
                 <h3 id="alerts">
-                    8
+                    0
                 </h3>
 
             </div>
 
         </div>
-
 
 
         <div class="custom-search">
@@ -920,18 +953,15 @@
                 placeholder="Search train number or train name..."
             >
 
-
             <button onclick="searchTrain()">
                 Search
             </button>
-
 
             <button onclick="loadTrains()">
                 Show All
             </button>
 
         </div>
-
 
 
         <div class="custom-table-container">
@@ -982,12 +1012,19 @@
 
                 <tbody id="trainTableBody">
 
+                    <tr>
+
+                        <td colspan="7">
+                            Loading train data...
+                        </td>
+
+                    </tr>
+
                 </tbody>
 
             </table>
 
         </div>
-
 
 
         <!-- =====================================================
@@ -1000,31 +1037,37 @@
                 Train Route Map
             </h2>
 
-
             <p>
-                select the train to view its current route and upcoming stations.
+                Select a train to view its current route and upcoming stations.
             </p>
-            <!-- Train selector -->
-            <select id="mapTrainSelector" onchange="showTrainRoute(this.value)"
+
+
+            <select
+                id="mapTrainSelector"
+                onchange="showTrainRoute(this.value)"
                 style="
-                flex: 1;
-                min-width: 250px;
-                padding: 15px 18px;
-                border-radius: 10px;
-                border: 1px solid rgba(255,255,255,0.18);
-                background: #102033;
-                color: white;
-                outline: none;
-                font-size: 15px;
+                    width: 100%;
+                    max-width: 400px;
+                    padding: 15px 18px;
+                    border-radius: 10px;
+                    border: 1px solid rgba(255,255,255,0.18);
+                    background: #102033;
+                    color: white;
+                    outline: none;
+                    font-size: 15px;
                 "
-                >
-        
-                <option value="12627">Karnataka Express</option>
-                <option value="12007">Shatabdi Express</option>
+            >
+
+                <option value="12007">
+                    12007 - Shatabdi Express
+                </option>
+
+                <option value="12627">
+                    12627 - Karnataka Express
+                </option>
+
             </select>
 
-            
-         <!--map-->
 
             <div id="trainMap"></div>
 
@@ -1034,7 +1077,6 @@
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -1063,6 +1105,7 @@
         </div>
 
 
+        <!-- DYNAMIC ANALYTICS CARDS -->
 
         <div class="custom-dashboard-cards">
 
@@ -1073,8 +1116,8 @@
                     Average Delay
                 </p>
 
-                <h3>
-                    8.4 min
+                <h3 id="averageDelay">
+                    Loading...
                 </h3>
 
             </div>
@@ -1083,11 +1126,11 @@
             <div class="custom-dashboard-card">
 
                 <p>
-                    Prediction Accuracy
+                    On-Time Rate
                 </p>
 
-                <h3>
-                    94.7%
+                <h3 id="onTimeRate">
+                    Loading...
                 </h3>
 
             </div>
@@ -1096,11 +1139,11 @@
             <div class="custom-dashboard-card">
 
                 <p>
-                    Predictions Today
+                    Trains Monitored
                 </p>
 
-                <h3>
-                    4,281
+                <h3 id="trainsMonitored">
+                    Loading...
                 </h3>
 
             </div>
@@ -1109,11 +1152,11 @@
             <div class="custom-dashboard-card">
 
                 <p>
-                    Delay Reduction
+                    Critical Alerts
                 </p>
 
-                <h3>
-                    18%
+                <h3 id="criticalAlerts">
+                    Loading...
                 </h3>
 
             </div>
@@ -1121,6 +1164,7 @@
         </div>
 
 
+        <!-- MAJOR DELAY FACTORS -->
 
         <div class="custom-table-container">
 
@@ -1128,101 +1172,106 @@
                 Major Delay Factors
             </h2>
 
-
-            <br>
-
-
             <table class="custom-table">
 
-                <tr>
+                <thead>
 
-                    <th>
-                        Factor
-                    </th>
+                    <tr>
 
-                    <th>
-                        Impact
-                    </th>
+                        <th>
+                            Factor
+                        </th>
 
-                    <th>
-                        Frequency
-                    </th>
+                        <th>
+                            Impact
+                        </th>
 
-                </tr>
+                        <th>
+                            Status
+                        </th>
 
+                    </tr>
 
-                <tr>
-
-                    <td>
-                        Track Congestion
-                    </td>
-
-                    <td>
-                        High
-                    </td>
-
-                    <td>
-                        32%
-                    </td>
-
-                </tr>
+                </thead>
 
 
-                <tr>
+                <tbody>
 
-                    <td>
-                        Previous Station Delay
-                    </td>
+                    <tr>
 
-                    <td>
-                        High
-                    </td>
+                        <td>
+                            Track Congestion
+                        </td>
 
-                    <td>
-                        28%
-                    </td>
+                        <td>
+                            High
+                        </td>
 
-                </tr>
+                        <td>
+                            Operational factor
+                        </td>
 
-
-                <tr>
-
-                    <td>
-                        Weather Conditions
-                    </td>
-
-                    <td>
-                        Medium
-                    </td>
-
-                    <td>
-                        16%
-                    </td>
-
-                </tr>
+                    </tr>
 
 
-                <tr>
+                    <tr>
 
-                    <td>
-                        Station Congestion
-                    </td>
+                        <td>
+                            Previous Station Delay
+                        </td>
 
-                    <td>
-                        Medium
-                    </td>
+                        <td>
+                            High
+                        </td>
 
-                    <td>
-                        14%
-                    </td>
+                        <td>
+                            Operational factor
+                        </td>
 
-                </tr>
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Weather Conditions
+                        </td>
+
+                        <td>
+                            Medium
+                        </td>
+
+                        <td>
+                            Environmental factor
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Station Congestion
+                        </td>
+
+                        <td>
+                            Medium
+                        </td>
+
+                        <td>
+                            Operational factor
+                        </td>
+
+                    </tr>
+
+                </tbody>
 
             </table>
 
         </div>
 
 
+        <!-- ML MODEL COMPARISON -->
 
         <div class="custom-table-container">
 
@@ -1230,187 +1279,158 @@
                 ML Model Performance Comparison
             </h2>
 
-
-            <br>
-
-
             <p>
 
-                Comparison of different machine learning models
-                for train ETA prediction.
+                Comparison of machine learning models on the
+                current simulated prototype dataset.
 
             </p>
-
-
-            <br>
 
 
             <table class="custom-table">
 
-                <tr>
+                <thead>
 
-                    <th>
-                        Model
-                    </th>
+                    <tr>
 
-                    <th>
-                        MAE
-                    </th>
+                        <th>
+                            Model
+                        </th>
 
-                    <th>
-                        RMSE
-                    </th>
+                        <th>
+                            MAE
+                        </th>
 
-                    <th>
-                        Accuracy ±10 min
-                    </th>
+                        <th>
+                            RMSE
+                        </th>
 
-                </tr>
+                        <th>
+                            Accuracy ±10 min
+                        </th>
 
+                    </tr>
 
-                <tr>
-
-                    <td>
-                        Schedule-based Baseline
-                    </td>
-
-                    <td>
-                        To be measured
-                    </td>
-
-                    <td>
-                        To be measured
-                    </td>
-
-                    <td>
-                        To be measured
-                    </td>
-
-                </tr>
+                </thead>
 
 
-                <tr>
+                <tbody>
 
-                    <td>
-                        <strong>
-                            Linear Regression
-                        </strong>
-                    </td>
+                    <tr>
 
-                    <td>
-                        <strong>
-                            0.81 min
-                        </strong>
-                    </td>
+                        <td>
+                            Schedule-based Baseline
+                        </td>
 
-                    <td>
-                        <strong>
-                            1.07 min
-                        </strong>
-                    </td>
+                        <td>
+                            To be measured
+                        </td>
 
-                    <td>
-                        <strong>
+                        <td>
+                            To be measured
+                        </td>
+
+                        <td>
+                            To be measured
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            <strong>
+                                Linear Regression
+                            </strong>
+                        </td>
+
+                        <td>
+                            <strong>
+                                0.81 min
+                            </strong>
+                        </td>
+
+                        <td>
+                            <strong>
+                                1.07 min
+                            </strong>
+                        </td>
+
+                        <td>
+                            <strong>
+                                100%
+                            </strong>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Random Forest
+                        </td>
+
+                        <td>
+                            5.73 min
+                        </td>
+
+                        <td>
+                            8.17 min
+                        </td>
+
+                        <td>
+                            75%
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Gradient Boosting
+                        </td>
+
+                        <td>
+                            3.73 min
+                        </td>
+
+                        <td>
+                            5.33 min
+                        </td>
+
+                        <td>
                             100%
-                        </strong>
-                    </td>
+                        </td>
 
-                </tr>
+                    </tr>
 
-
-                <tr>
-
-                    <td>
-                        Random Forest
-                    </td>
-
-                    <td>
-                        5.73 min
-                    </td>
-
-                    <td>
-                        8.17 min
-                    </td>
-
-                    <td>
-                        75%
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>
-                        Gradient Boosting
-                    </td>
-
-                    <td>
-                        3.73 min
-                    </td>
-
-                    <td>
-                        5.33 min
-                    </td>
-
-                    <td>
-                        100%
-                    </td>
-
-                </tr>
+                </tbody>
 
             </table>
 
 
-            <br>
-
-
-            <p>
+            <div class="prototype-note">
 
                 <strong>
-                    Best Model:
+                    Prototype note:
                 </strong>
 
-                Linear Regression
+                On the current simulated dataset,
+                Linear Regression achieved an MAE of
+                0.81 minutes. These results are preliminary
+                and should not be interpreted as real-world
+                railway prediction accuracy.
 
-            </p>
-
-
-            <br>
-
-
-            <p>
-
-                On the current prototype dataset,
-                Linear Regression achieved the lowest
-                MAE of 0.81 minutes.
-
-            </p>
-
-
-            <br>
-
-
-            <p>
-
-                <small>
-
-                    Note: These are preliminary results
-                    obtained using a simulated prototype
-                    dataset. The model will be retrained
-                    and validated using larger real-world
-                    railway operational datasets.
-
-                </small>
-
-            </p>
+            </div>
 
         </div>
 
     </div>
 
 </section>
-
 
 
 <!-- =========================================================
@@ -1433,13 +1453,191 @@
             </h1>
 
             <p>
-                Monitor railway operations and identify
-                potential disruptions.
+                Analyse train conditions and identify potential disruptions.
             </p>
 
         </div>
 
 
+        <!-- CONTROL INPUTS -->
+
+        <div class="custom-table-container">
+
+            <h2>
+                Control Room Analysis
+            </h2>
+
+            <p>
+                Enter current train conditions to generate operational alerts
+                and dynamically recalculate the ETA.
+            </p>
+
+
+            <div class="control-input-grid">
+
+
+                <div class="control-input-group">
+
+                    <label for="controlTrainNumber">
+                        Train Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="controlTrainNumber"
+                        value="12627"
+                        placeholder="Example: 12627"
+                    >
+
+                </div>
+
+
+                <div class="control-input-group">
+
+                    <label for="controlSpeed">
+                        Current Speed (km/h)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="controlSpeed"
+                        value="66"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <div class="control-input-group">
+
+                    <label for="controlDelay">
+                        Current Delay (minutes)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="controlDelay"
+                        value="9"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <div class="control-input-group">
+
+                    <label for="controlWeather">
+                        Weather Condition
+                    </label>
+
+                    <select id="controlWeather">
+
+                        <option value="0">
+                            Normal
+                        </option>
+
+                        <option value="1">
+                            Moderate
+                        </option>
+
+                        <option value="2">
+                            Severe
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="control-input-group">
+
+                    <label for="controlCongestion">
+                        Track Congestion
+                    </label>
+
+                    <select id="controlCongestion">
+
+                        <option value="1">
+                            Low
+                        </option>
+
+                        <option value="2">
+                            Medium
+                        </option>
+
+                        <option value="3">
+                            High
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="controlAnalysis"
+                class="control-button"
+                onclick="analyzeControlRoom()"
+            >
+                Analyze Network
+            </button>
+
+
+            <!-- SUMMARY -->
+
+            <div class="control-analysis">
+
+                <p>
+                    <strong>
+                        Train:
+                    </strong>
+
+                    <span id="summaryTrain">
+                        —
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>
+                        Speed:
+                    </strong>
+
+                    <span id="summarySpeed">
+                        —
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>
+                        Delay:
+                    </strong>
+
+                    <span id="summaryDelay">
+                        —
+                    </span>
+                </p>
+
+
+                <p>
+                    <strong>
+                        Predicted ETA:
+                    </strong>
+
+                    <span id="summaryETA">
+                        —
+                    </span>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTROL ROOM SUMMARY CARDS -->
 
         <div class="custom-dashboard-cards">
 
@@ -1450,7 +1648,10 @@
                     Network Status
                 </p>
 
-                <h3 class="green">
+                <h3
+                    id="networkStatus"
+                    class="green"
+                >
                     Normal
                 </h3>
 
@@ -1463,8 +1664,8 @@
                     Active Alerts
                 </p>
 
-                <h3>
-                    8
+                <h3 id="activeAlerts">
+                    0
                 </h3>
 
             </div>
@@ -1476,8 +1677,8 @@
                     Delayed Trains
                 </p>
 
-                <h3>
-                    26
+                <h3 id="delayedTrains">
+                    0
                 </h3>
 
             </div>
@@ -1489,8 +1690,8 @@
                     Critical Sections
                 </p>
 
-                <h3>
-                    3
+                <h3 id="criticalSections">
+                    0
                 </h3>
 
             </div>
@@ -1498,6 +1699,7 @@
         </div>
 
 
+        <!-- OPERATIONAL ALERTS -->
 
         <div class="custom-table-container">
 
@@ -1505,106 +1707,40 @@
                 Operational Alerts
             </h2>
 
-
-            <br>
-
-
             <table class="custom-table">
 
-                <tr>
+                <thead>
 
-                    <th>
-                        Alert
-                    </th>
+                    <tr>
 
-                    <th>
-                        Location
-                    </th>
+                        <th>
+                            Alert
+                        </th>
 
-                    <th>
-                        Severity
-                    </th>
+                        <th>
+                            Severity
+                        </th>
 
-                    <th>
-                        Action
-                    </th>
+                        <th>
+                            Recommended Action
+                        </th>
 
-                </tr>
+                    </tr>
 
-
-                <tr>
-
-                    <td>
-                        Track Congestion
-                    </td>
-
-                    <td>
-                        Yeshwanthpur
-                    </td>
-
-                    <td>
-
-                        <span class="status warning">
-                            Medium
-                        </span>
-
-                    </td>
-
-                    <td>
-                        Monitor
-                    </td>
-
-                </tr>
+                </thead>
 
 
-                <tr>
+                <tbody id="alertTableBody">
 
-                    <td>
-                        Train Delay
-                    </td>
+                    <tr>
 
-                    <td>
-                        Tumakuru
-                    </td>
+                        <td colspan="3">
+                            No alerts generated yet.
+                        </td>
 
-                    <td>
+                    </tr>
 
-                        <span class="status delayed">
-                            High
-                        </span>
-
-                    </td>
-
-                    <td>
-                        Recalculate ETA
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>
-                        Route Congestion
-                    </td>
-
-                    <td>
-                        Bengaluru
-                    </td>
-
-                    <td>
-
-                        <span class="status warning">
-                            Medium
-                        </span>
-
-                    </td>
-
-                    <td>
-                        Monitor
-                    </td>
-
-                </tr>
+                </tbody>
 
             </table>
 
@@ -1615,19 +1751,19 @@
 </section>
 
 
-
 <!-- =========================================================
      JAVASCRIPT
 ========================================================= -->
 
 <script src="main.js"></script>
 
+
+<!-- Live Train Dashboard -->
+
 <script src="dashboard.js"></script>
 
 
-<!-- =====================================================
-     LEAFLET MAP JAVASCRIPT
-===================================================== -->
+<!-- Leaflet -->
 
 <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
@@ -1639,18 +1775,28 @@
 <script src="map.js"></script>
 
 
-<script>
+<!-- Analytics -->
 
-    /*
-       Navigation is handled inside index.html.
-       The other HTML files do not need to be changed.
-    */
+<script src="analytics.js"></script>
+
+
+<!-- Control Room -->
+
+<script src="control-room.js"></script>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<script>
 
     document.querySelectorAll('.nav-links a').forEach(link => {
 
         link.addEventListener('click', function(event) {
 
-            const target = this.getAttribute('href');
+            const target =
+                this.getAttribute('href');
 
             if (target.startsWith('#')) {
 
@@ -1673,11 +1819,6 @@
 
     });
 
-
-    /*
-       Make the page start at the correct section
-       when a #link is used.
-    */
 
     window.addEventListener('load', function() {
 

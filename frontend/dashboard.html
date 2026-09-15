@@ -19,6 +19,8 @@
 <body>
 
 
+<!-- ================= NAVBAR ================= -->
+
 <nav class="navbar">
 
     <div class="logo">
@@ -27,7 +29,9 @@
 
     <div class="nav-links">
 
-        <a href="index.html">Home</a>
+        <a href="index.html">
+            Home
+        </a>
 
         <a href="dashboard.html">
             Live Trains
@@ -46,8 +50,12 @@
 </nav>
 
 
+<!-- ================= MAIN CONTAINER ================= -->
 
 <div class="dashboard-container">
+
+
+    <!-- ================= PAGE TITLE ================= -->
 
     <div class="page-title">
 
@@ -66,16 +74,19 @@
     </div>
 
 
-    <!-- Statistics -->
+    <!-- ================= STATISTICS ================= -->
 
     <div class="dashboard-cards">
 
+
         <div class="dashboard-card">
 
-            <p>Active Trains</p>
+            <p>
+                Active Trains
+            </p>
 
             <h3 id="activeTrains">
-                128
+                0
             </h3>
 
         </div>
@@ -83,10 +94,12 @@
 
         <div class="dashboard-card">
 
-            <p>On Time</p>
+            <p>
+                On Time
+            </p>
 
             <h3 id="onTime">
-                94
+                0
             </h3>
 
         </div>
@@ -94,10 +107,12 @@
 
         <div class="dashboard-card">
 
-            <p>Delayed</p>
+            <p>
+                Delayed
+            </p>
 
             <h3 id="delayed">
-                26
+                0
             </h3>
 
         </div>
@@ -105,10 +120,12 @@
 
         <div class="dashboard-card">
 
-            <p>Critical Alerts</p>
+            <p>
+                Critical Alerts
+            </p>
 
             <h3 id="alerts">
-                8
+                0
             </h3>
 
         </div>
@@ -116,28 +133,44 @@
     </div>
 
 
-    <!-- Search -->
-     <div class="search-box">
-
-    <input
-        type="text"
-        id="trainSearch"
-        class="search-box"
-        placeholder="Search train number or train name..."
-    >
-        <button onclick="searchTrain()">search</button>
-        <button onclick="loadTrains()">showall</button>
-        <div>
-
-        
-    
+    <br>
 
 
-    <!-- Train table -->
+    <!-- ================= SEARCH ================= -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="trainSearch"
+            placeholder="Search train number or train name..."
+        >
+
+        <button
+            onclick="searchTrain()">
+            Search
+        </button>
+
+        <button
+            onclick="loadTrains()">
+            Show All
+        </button>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ================= TRAIN TABLE ================= -->
 
     <div class="train-table-container">
 
-        <h2>Live Train Status</h2>
+        <h2>
+            Live Train Status
+        </h2>
+
+        <br>
 
 
         <table class="train-table">
@@ -146,18 +179,33 @@
 
                 <tr>
 
-                    <th>Train Number</th>
+                    <th>
+                        Train Number
+                    </th>
 
-                    <th>Train Name</th>
+                    <th>
+                        Train Name
+                    </th>
 
-                    <th>Current Station</th>
-                    <th>Next Station</th>
+                    <th>
+                        Current Station
+                    </th>
 
-                    <th>Speed</th>
+                    <th>
+                        Next Station
+                    </th>
 
-                    <th>Delay</th>
+                    <th>
+                        Speed
+                    </th>
 
-                    <th>ML Predicted ETA</th>
+                    <th>
+                        Delay
+                    </th>
+
+                    <th>
+                        ML Predicted ETA
+                    </th>
 
                 </tr>
 
@@ -166,16 +214,28 @@
 
             <tbody id="trainTableBody">
 
+                <tr>
+
+                    <td colspan="7">
+                        Loading train data...
+                    </td>
+
+                </tr>
+
             </tbody>
 
         </table>
 
     </div>
 
+
 </div>
 
 
+<!-- ================= JAVASCRIPT ================= -->
+
 <script src="dashboard.js"></script>
+
 
 </body>
 

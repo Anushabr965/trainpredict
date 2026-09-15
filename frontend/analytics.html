@@ -27,7 +27,9 @@
 
     <div class="nav-links">
 
-        <a href="index.html">Home</a>
+        <a href="index.html">
+            Home
+        </a>
 
         <a href="dashboard.html">
             Live Trains
@@ -62,124 +64,186 @@
         </h1>
 
         <p>
-            Analyse train delays and prediction performance.
+            Analyse train delays and machine learning prediction performance.
         </p>
 
     </div>
+
 
 
     <!-- DASHBOARD STATISTICS -->
 
     <div class="dashboard-cards">
 
+
         <div class="dashboard-card">
 
-            <p>Average Delay</p>
+            <p>
+                Average Delay
+            </p>
 
-            <h3>8.4 min</h3>
+            <h3 id="averageDelay">
+                Loading...
+            </h3>
 
         </div>
 
 
         <div class="dashboard-card">
 
-            <p>Prediction Accuracy</p>
+            <p>
+                On-Time Rate
+            </p>
 
-            <h3>94.7%</h3>
-
-        </div>
-
-
-        <div class="dashboard-card">
-
-            <p>Predictions Today</p>
-
-            <h3>4,281</h3>
+            <h3 id="onTimeRate">
+                Loading...
+            </h3>
 
         </div>
 
 
         <div class="dashboard-card">
 
-            <p>Delay Reduction</p>
+            <p>
+                Trains Monitored
+            </p>
 
-            <h3>18%</h3>
+            <h3 id="trainsMonitored">
+                Loading...
+            </h3>
 
         </div>
+
+
+        <div class="dashboard-card">
+
+            <p>
+                Critical Alerts
+            </p>
+
+            <h3 id="criticalAlerts">
+                Loading...
+            </h3>
+
+        </div>
+
 
     </div>
+
 
 
     <!-- MAJOR DELAY FACTORS -->
 
     <div class="train-table-container">
 
-        <h2>Major Delay Factors</h2>
+        <h2>
+            Major Delay Factors
+        </h2>
 
         <br>
 
+
         <table class="train-table">
 
-            <tr>
+            <thead>
 
-                <th>Factor</th>
+                <tr>
 
-                <th>Impact</th>
+                    <th>
+                        Factor
+                    </th>
 
-                <th>Frequency</th>
+                    <th>
+                        Impact
+                    </th>
 
-            </tr>
+                    <th>
+                        Frequency
+                    </th>
 
+                </tr>
 
-            <tr>
-
-                <td>Track Congestion</td>
-
-                <td>High</td>
-
-                <td>32%</td>
-
-            </tr>
-
-
-            <tr>
-
-                <td>Previous Station Delay</td>
-
-                <td>High</td>
-
-                <td>28%</td>
-
-            </tr>
+            </thead>
 
 
-            <tr>
+            <tbody>
 
-                <td>Weather Conditions</td>
+                <tr>
 
-                <td>Medium</td>
+                    <td>
+                        Track Congestion
+                    </td>
 
-                <td>16%</td>
+                    <td>
+                        High
+                    </td>
 
-            </tr>
+                    <td>
+                        32%
+                    </td>
+
+                </tr>
 
 
-            <tr>
+                <tr>
 
-                <td>Station Congestion</td>
+                    <td>
+                        Previous Station Delay
+                    </td>
 
-                <td>Medium</td>
+                    <td>
+                        High
+                    </td>
 
-                <td>14%</td>
+                    <td>
+                        28%
+                    </td>
 
-            </tr>
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Weather Conditions
+                    </td>
+
+                    <td>
+                        Medium
+                    </td>
+
+                    <td>
+                        16%
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Station Congestion
+                    </td>
+
+                    <td>
+                        Medium
+                    </td>
+
+                    <td>
+                        14%
+                    </td>
+
+                </tr>
+
+            </tbody>
 
         </table>
 
     </div>
 
 
-    <!-- ML MODEL PERFORMANCE COMPARISON -->
+
+    <!-- ML MODEL PERFORMANCE -->
 
     <div class="train-table-container">
 
@@ -190,8 +254,7 @@
         <br>
 
         <p>
-            Comparison of different machine learning models
-            for train ETA prediction.
+            Comparison of machine learning models for train ETA prediction.
         </p>
 
         <br>
@@ -199,117 +262,127 @@
 
         <table class="train-table">
 
-            <tr>
+            <thead>
 
-                <th>Model</th>
+                <tr>
 
-                <th>MAE</th>
+                    <th>
+                        Model
+                    </th>
 
-                <th>RMSE</th>
+                    <th>
+                        MAE
+                    </th>
 
-                <th>Accuracy ±10 min</th>
+                    <th>
+                        RMSE
+                    </th>
 
-            </tr>
+                    <th>
+                        Accuracy ±10 min
+                    </th>
 
+                </tr>
 
-            <!-- BASELINE -->
-
-            <tr>
-
-                <td>
-                    Schedule-based Baseline
-                </td>
-
-                <td>
-                    To be measured
-                </td>
-
-                <td>
-                    To be measured
-                </td>
-
-                <td>
-                    To be measured
-                </td>
-
-            </tr>
+            </thead>
 
 
-            <!-- LINEAR REGRESSION -->
+            <tbody>
 
-            <tr>
 
-                <td>
-                    <strong>
-                        Linear Regression
-                    </strong>
-                </td>
+                <tr>
 
-                <td>
-                    <strong>
-                        0.81 min
-                    </strong>
-                </td>
+                    <td>
+                        Schedule-based Baseline
+                    </td>
 
-                <td>
-                    <strong>
-                        1.07 min
-                    </strong>
-                </td>
+                    <td>
+                        Not measured
+                    </td>
 
-                <td>
-                    <strong>
+                    <td>
+                        Not measured
+                    </td>
+
+                    <td>
+                        Not measured
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            Linear Regression
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            0.81 min
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            1.07 min
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            100%
+                        </strong>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Random Forest
+                    </td>
+
+                    <td>
+                        5.73 min
+                    </td>
+
+                    <td>
+                        8.17 min
+                    </td>
+
+                    <td>
+                        75%
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Gradient Boosting
+                    </td>
+
+                    <td>
+                        3.73 min
+                    </td>
+
+                    <td>
+                        5.33 min
+                    </td>
+
+                    <td>
                         100%
-                    </strong>
-                </td>
+                    </td>
 
-            </tr>
-
-
-            <!-- RANDOM FOREST -->
-
-            <tr>
-
-                <td>
-                    Random Forest
-                </td>
-
-                <td>
-                    5.73 min
-                </td>
-
-                <td>
-                    8.17 min
-                </td>
-
-                <td>
-                    75%
-                </td>
-
-            </tr>
+                </tr>
 
 
-            <!-- GRADIENT BOOSTING -->
-
-            <tr>
-
-                <td>
-                    Gradient Boosting
-                </td>
-
-                <td>
-                    3.73 min
-                </td>
-
-                <td>
-                    5.33 min
-                </td>
-
-                <td>
-                    100%
-                </td>
-
-            </tr>
+            </tbody>
 
         </table>
 
@@ -317,12 +390,10 @@
         <br>
 
 
-        <!-- BEST MODEL -->
-
         <p>
 
             <strong>
-                Best Model:
+                Model selected for the prototype:
             </strong>
 
             Linear Regression
@@ -336,8 +407,8 @@
         <p>
 
             On the current prototype dataset,
-            Linear Regression achieved the lowest
-            MAE of 0.81 minutes.
+            Linear Regression achieved an MAE of
+            0.81 minutes.
 
         </p>
 
@@ -345,17 +416,15 @@
         <br>
 
 
-        <!-- DATASET DISCLAIMER -->
-
         <p>
 
             <small>
 
-                Note: These are preliminary results
-                obtained using a simulated prototype
-                dataset. The model will be retrained
-                and validated using larger real-world
-                railway operational datasets.
+                Note: These are preliminary results obtained
+                using a simulated prototype dataset.
+                The model will be retrained and validated
+                using larger real-world railway operational
+                datasets.
 
             </small>
 
@@ -365,6 +434,10 @@
 
 
 </div>
+
+
+
+<script src="analytics.js"></script>
 
 
 </body>

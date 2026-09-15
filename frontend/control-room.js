@@ -3,33 +3,33 @@
 // Backend + ML ETA Connected
 // =====================================================
 
-const API_URL = "http://127.0.0.1:8000";
+// Train / ML APIs
+const CONTROL_API_URL = "http://127.0.0.1:8000/api";
+
+// Control Room alerts API
+const CONTROL_ROOM_API_URL = "http://127.0.0.1:8000";
 
 
 // =====================================================
 // ANALYZE RAILWAY CONDITIONS
 // =====================================================
 
-async function analyzeConditions() {
+async function analyzeControlRoom() {
 
-    // -------------------------------------------------
-    // GET INPUT VALUES
-    // -------------------------------------------------
+    const trainNumberElement =
+        document.getElementById("controlTrainNumber");
 
-    const trainNumber =
-        document.getElementById("controlTrainNumber").value.trim();
+    const speedElement =
+        document.getElementById("controlSpeed");
 
-    const speed =
-        Number(document.getElementById("controlSpeed").value);
+    const delayElement =
+        document.getElementById("controlDelay");
 
-    const delay =
-        Number(document.getElementById("controlDelay").value);
+    const weatherElement =
+        document.getElementById("controlWeather");
 
-    const weather =
-        Number(document.getElementById("controlWeather").value);
-
-    const congestion =
-        Number(document.getElementById("controlCongestion").value);
+    const congestionElement =
+        document.getElementById("controlCongestion");
 
     const analysisBox =
         document.getElementById("controlAnalysis");
@@ -38,43 +38,91 @@ async function analyzeConditions() {
         document.getElementById("alertTableBody");
 
 
-    // -------------------------------------------------
+    // =================================================
+    // CHECK HTML ELEMENTS
+    // =================================================
+
+    if (
+        !trainNumberElement ||
+        !speedElement ||
+        !delayElement ||
+        !weatherElement ||
+        !congestionElement ||
+        !analysisBox ||
+        !alertTableBody
+    ) {
+
+        console.error(
+            "Control Room HTML elements are missing."
+        );
+
+        return;
+    }
+
+
+    // =================================================
+    // GET INPUT VALUES
+    // =================================================
+
+    const trainNumber =
+        trainNumberElement.value.trim();
+
+    const speed =
+        Number(speedElement.value);
+
+    const delay =
+        Number(delayElement.value);
+
+    const weather =
+        Number(weatherElement.value);
+
+    const congestion =
+        Number(congestionElement.value);
+
+
+    // =================================================
     // VALIDATION
-    // -------------------------------------------------
+    // =================================================
 
     if (trainNumber === "") {
 
         analysisBox.innerHTML = `
-            <p>⚠️ Please enter a train number.</p>
+            <p>
+                ⚠️ Please enter a train number.
+            </p>
         `;
 
         return;
     }
 
 
-    if (speed <= 0) {
+    if (speed <= 0 || Number.isNaN(speed)) {
 
         analysisBox.innerHTML = `
-            <p>⚠️ Please enter a valid train speed.</p>
+            <p>
+                ⚠️ Please enter a valid train speed.
+            </p>
         `;
 
         return;
     }
 
 
-    if (delay < 0) {
+    if (delay < 0 || Number.isNaN(delay)) {
 
         analysisBox.innerHTML = `
-            <p>⚠️ Delay cannot be negative.</p>
+            <p>
+                ⚠️ Delay cannot be negative.
+            </p>
         `;
 
         return;
     }
 
 
-    // -------------------------------------------------
+    // =================================================
     // LOADING MESSAGE
-    // -------------------------------------------------
+    // =================================================
 
     analysisBox.innerHTML = `
         <p>
@@ -98,11 +146,19 @@ async function analyzeConditions() {
             `&congestion_level=${congestion}`;
 
 
+        console.log(
+            "ML ETA URL:",
+            etaURL
+        );
+
+
         const etaResponse =
             await fetch(etaURL);
 
 
+        // =================================================
         // TRAIN NOT FOUND
+        // =================================================
 
         if (!etaResponse.ok) {
 
@@ -110,12 +166,13 @@ async function analyzeConditions() {
 
                 analysisBox.innerHTML = `
                     <p>
-                        ❌ Train ${trainNumber}
+                        ❌ Train
+                        <strong>${trainNumber}</strong>
                         was not found.
                     </p>
 
                     <p>
-                        Try train
+                        Try:
                         <strong>12627</strong>
                         or
                         <strong>12007</strong>.
@@ -125,10 +182,10 @@ async function analyzeConditions() {
                 return;
             }
 
-            throw new Error(
-                "ETA request failed"
-            );
 
+            throw new Error(
+                `ETA request failed: ${etaResponse.status}`
+            );
         }
 
 
@@ -136,16 +193,28 @@ async function analyzeConditions() {
             await etaResponse.json();
 
 
+        console.log(
+            "✅ ML ETA response:",
+            etaData
+        );
+
+
         // =================================================
         // 2. GET CONTROL ROOM ALERTS
         // =================================================
 
         const alertURL =
-            `${API_URL}/control-room/analyze` +
+            `${CONTROL_ROOM_API_URL}/control-room/analyze` +
             `?speed_kmh=${speed}` +
             `&current_delay=${delay}` +
             `&weather_factor=${weather}` +
             `&congestion_level=${congestion}`;
+
+
+        console.log(
+            "Control Room URL:",
+            alertURL
+        );
 
 
         const alertResponse =
@@ -155,9 +224,8 @@ async function analyzeConditions() {
         if (!alertResponse.ok) {
 
             throw new Error(
-                "Control Room request failed"
+                `Control Room request failed: ${alertResponse.status}`
             );
-
         }
 
 
@@ -166,18 +234,13 @@ async function analyzeConditions() {
 
 
         console.log(
-            "ML ETA response:",
-            etaData
-        );
-
-        console.log(
-            "Control Room response:",
+            "✅ Control Room response:",
             alertData
         );
 
 
         // =================================================
-        // 3. UPDATE OPERATIONAL ALERT TABLE
+        // 3. UPDATE ALERT TABLE
         // =================================================
 
         alertTableBody.innerHTML = "";
@@ -191,52 +254,40 @@ async function analyzeConditions() {
             alertTableBody.innerHTML = `
                 <tr>
 
-                    <td colspan="4">
-
+                    <td colspan="3">
                         ✅ No operational
                         disruptions detected.
-
                     </td>
 
                 </tr>
             `;
 
-        }
+        } else {
 
-        else {
+            alertData.alerts.forEach(item => {
 
-            alertData.alerts.forEach(
-                item => {
-
-                    const row =
-                        document.createElement("tr");
+                const row =
+                    document.createElement("tr");
 
 
-                    row.innerHTML = `
+                row.innerHTML = `
+                    <td>
+                        ${item.alert}
+                    </td>
 
-                        <td>
-                            ${item.alert}
-                        </td>
+                    <td>
+                        ${item.severity}
+                    </td>
 
-                        <td>
-                            Current Route
-                        </td>
-
-                        <td>
-                            ${item.severity}
-                        </td>
-
-                        <td>
-                            ${item.action}
-                        </td>
-
-                    `;
+                    <td>
+                        ${item.action}
+                    </td>
+                `;
 
 
-                    alertTableBody.appendChild(row);
+                alertTableBody.appendChild(row);
 
-                }
-            );
+            });
 
         }
 
@@ -261,7 +312,7 @@ async function analyzeConditions() {
 
 
         // =================================================
-        // 5. UPDATE NETWORK STATUS
+        // 5. NETWORK STATUS
         // =================================================
 
         const networkStatus =
@@ -270,105 +321,156 @@ async function analyzeConditions() {
             );
 
 
-        networkStatus.textContent =
-            alertData.network_status;
+        if (networkStatus) {
+
+            networkStatus.textContent =
+                alertData.network_status;
 
 
-        // Remove old status classes
-
-        networkStatus.classList.remove(
-            "green",
-            "red",
-            "orange"
-        );
-
-
-        // Apply status class
-
-        if (
-            alertData.network_status === "Normal"
-        ) {
-
-            networkStatus.classList.add(
-                "green"
-            );
-
-        }
-
-        else if (
-            alertData.network_status === "Disruption"
-        ) {
-
-            networkStatus.classList.add(
-                "red"
-            );
-
-        }
-
-        else {
-
-            networkStatus.classList.add(
+            networkStatus.classList.remove(
+                "green",
+                "red",
                 "orange"
             );
 
+
+            if (
+                alertData.network_status ===
+                "Normal"
+            ) {
+
+                networkStatus.classList.add(
+                    "green"
+                );
+
+            } else if (
+                alertData.network_status ===
+                "Disruption"
+            ) {
+
+                networkStatus.classList.add(
+                    "red"
+                );
+
+            } else {
+
+                networkStatus.classList.add(
+                    "orange"
+                );
+
+            }
+
         }
 
 
         // =================================================
-        // 6. UPDATE CONTROL ROOM STATISTICS
+        // 6. CONTROL ROOM STATISTICS
         // =================================================
 
-        document.getElementById(
-            "activeAlerts"
-        ).textContent =
-            alertCount;
+        const activeAlerts =
+            document.getElementById(
+                "activeAlerts"
+            );
 
 
-        document.getElementById(
-            "criticalSections"
-        ).textContent =
-            criticalCount;
+        const criticalSections =
+            document.getElementById(
+                "criticalSections"
+            );
 
 
-        // Selected train is considered delayed
-        // when delay is greater than 5 minutes.
-
-        document.getElementById(
-            "delayedTrains"
-        ).textContent =
-            delay > 5 ? "1" : "0";
+        const delayedTrains =
+            document.getElementById(
+                "delayedTrains"
+            );
 
 
-        // =================================================
-        // 7. UPDATE OPERATIONAL SUMMARY
-        // =================================================
+        if (activeAlerts) {
 
-        document.getElementById(
-            "summaryTrain"
-        ).textContent =
-            etaData.train_number;
+            activeAlerts.textContent =
+                alertCount;
+
+        }
 
 
-        document.getElementById(
-            "summarySpeed"
-        ).textContent =
-            `${etaData.speed_kmh} km/h`;
+        if (criticalSections) {
+
+            criticalSections.textContent =
+                criticalCount;
+
+        }
 
 
-        document.getElementById(
-            "summaryDelay"
-        ).textContent =
-            `${etaData.current_delay} min`;
+        if (delayedTrains) {
 
+            delayedTrains.textContent =
+                delay > 5 ? "1" : "0";
 
-        document.getElementById(
-            "summaryETA"
-        ).textContent =
-            `${etaData.predicted_eta_minutes} min`;
+        }
 
 
         // =================================================
-        // 8. DISPLAY ANALYSIS RESULT
+        // 7. OPERATIONAL SUMMARY
+        // =================================================
+
+        const summaryTrain =
+            document.getElementById(
+                "summaryTrain"
+            );
+
+
+        const summarySpeed =
+            document.getElementById(
+                "summarySpeed"
+            );
+
+
+        const summaryDelay =
+            document.getElementById(
+                "summaryDelay"
+            );
+
+
+        const summaryETA =
+            document.getElementById(
+                "summaryETA"
+            );
+
+
+        if (summaryTrain) {
+
+            summaryTrain.textContent =
+                etaData.train_number;
+
+        }
+
+
+        if (summarySpeed) {
+
+            summarySpeed.textContent =
+                `${etaData.speed_kmh} km/h`;
+
+        }
+
+
+        if (summaryDelay) {
+
+            summaryDelay.textContent =
+                `${etaData.current_delay} min`;
+
+        }
+
+
+        if (summaryETA) {
+
+            summaryETA.textContent =
+                `${etaData.predicted_eta_minutes} min`;
+
+        }
+
+
+        // =================================================
+        // 8. RECOMMENDED ACTION
         // =================================================
 
         const recommendedAction =
@@ -380,10 +482,13 @@ async function analyzeConditions() {
                 : "Continue normal operations";
 
 
+        // =================================================
+        // 9. DISPLAY ANALYSIS
+        // =================================================
+
         analysisBox.innerHTML = `
 
             <div class="dashboard-cards">
-
 
                 <div class="dashboard-card">
 
@@ -452,7 +557,6 @@ async function analyzeConditions() {
 
                 </div>
 
-
             </div>
 
 
@@ -516,10 +620,6 @@ async function analyzeConditions() {
         `;
 
 
-        // =================================================
-        // 9. SUCCESS MESSAGE IN CONSOLE
-        // =================================================
-
         console.log(
             "✅ Control Room analysis completed"
         );
@@ -534,7 +634,7 @@ async function analyzeConditions() {
     catch (error) {
 
         console.error(
-            "Control Room / ML error:",
+            "❌ Control Room / ML error:",
             error
         );
 
@@ -547,12 +647,36 @@ async function analyzeConditions() {
             </p>
 
             <p>
+
+                Error:
+                <strong>
+                    ${error.message}
+                </strong>
+
+            </p>
+
+            <p>
+
                 Make sure the FastAPI server
                 is running.
+
             </p>
 
         `;
 
     }
+
+}
+
+
+// =====================================================
+// BACKWARD COMPATIBILITY
+// =====================================================
+
+// Allows the old function name to work too.
+
+function analyzeConditions() {
+
+    analyzeControlRoom();
 
 }

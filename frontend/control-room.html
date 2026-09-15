@@ -15,9 +15,9 @@
 
 </head>
 
-
 <body>
 
+<!-- ================= NAVBAR ================= -->
 
 <nav class="navbar">
 
@@ -27,7 +27,9 @@
 
     <div class="nav-links">
 
-        <a href="index.html">Home</a>
+        <a href="index.html">
+            Home
+        </a>
 
         <a href="dashboard.html">
             Live Trains
@@ -46,7 +48,12 @@
 </nav>
 
 
+<!-- ================= MAIN CONTAINER ================= -->
+
 <div class="dashboard-container">
+
+
+    <!-- ================= PAGE TITLE ================= -->
 
     <div class="page-title">
 
@@ -65,47 +72,210 @@
     </div>
 
 
+    <!-- ================= CONTROL INPUTS ================= -->
+
+    <div class="train-table-container">
+
+        <h2>
+            Railway Conditions
+        </h2>
+
+        <br>
+
+        <div class="dashboard-cards">
+
+            <!-- Train Number -->
+
+            <div class="dashboard-card">
+
+                <p>
+                    Train Number
+                </p>
+
+                <input
+                    type="text"
+                    id="controlTrainNumber"
+                    placeholder="Example: 12627"
+                >
+
+            </div>
+
+
+            <!-- Speed -->
+
+            <div class="dashboard-card">
+
+                <p>
+                    Current Speed (km/h)
+                </p>
+
+                <input
+                    type="number"
+                    id="controlSpeed"
+                    placeholder="Example: 60"
+                    min="1"
+                >
+
+            </div>
+
+
+            <!-- Delay -->
+
+            <div class="dashboard-card">
+
+                <p>
+                    Current Delay (min)
+                </p>
+
+                <input
+                    type="number"
+                    id="controlDelay"
+                    placeholder="Example: 10"
+                    min="0"
+                >
+
+            </div>
+
+
+            <!-- Weather -->
+
+            <div class="dashboard-card">
+
+                <p>
+                    Weather Factor
+                </p>
+
+                <select id="controlWeather">
+
+                    <option value="0">
+                        Normal
+                    </option>
+
+                    <option value="1">
+                        Moderate
+                    </option>
+
+                    <option value="2">
+                        Severe
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Congestion -->
+
+            <div class="dashboard-card">
+
+                <p>
+                    Congestion Level
+                </p>
+
+                <select id="controlCongestion">
+
+                    <option value="1">
+                        Low
+                    </option>
+
+                    <option value="2">
+                        Medium
+                    </option>
+
+                    <option value="3">
+                        High
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+
+        <!-- ANALYZE BUTTON -->
+
+        <button
+            onclick="analyzeConditions()"
+            class="primary-btn">
+
+            🤖 Analyze Conditions
+
+        </button>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ================= NETWORK STATISTICS ================= -->
+
     <div class="dashboard-cards">
 
+
+        <!-- Network Status -->
+
         <div class="dashboard-card">
 
-            <p>Network Status</p>
+            <p>
+                Network Status
+            </p>
 
-            <h3 class="green">
+            <h3
+                id="networkStatus"
+                class="green">
+
                 Normal
+
             </h3>
 
         </div>
 
 
+        <!-- Active Alerts -->
+
         <div class="dashboard-card">
 
-            <p>Active Alerts</p>
+            <p>
+                Active Alerts
+            </p>
 
-            <h3>
-                8
+            <h3 id="activeAlerts">
+                0
             </h3>
 
         </div>
 
 
+        <!-- Delayed Trains -->
+
         <div class="dashboard-card">
 
-            <p>Delayed Trains</p>
+            <p>
+                Delayed Trains
+            </p>
 
-            <h3>
-                26
+            <h3 id="delayedTrains">
+                0
             </h3>
 
         </div>
 
 
+        <!-- Critical Sections -->
+
         <div class="dashboard-card">
 
-            <p>Critical Sections</p>
+            <p>
+                Critical Sections
+            </p>
 
-            <h3>
-                3
+            <h3 id="criticalSections">
+                0
             </h3>
 
         </div>
@@ -113,107 +283,169 @@
     </div>
 
 
+    <br>
+
+
+    <!-- ================= ML ETA PREDICTION ================= -->
+
     <div class="train-table-container">
 
-        <h2>Operational Alerts</h2>
+        <h2>
+            ML ETA Prediction
+        </h2>
 
         <br>
 
+        <div id="controlAnalysis">
+
+            <p>
+                Enter railway conditions above and click
+                <strong>Analyze Conditions</strong>
+                to generate an ML-based ETA prediction.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ================= OPERATIONAL SUMMARY ================= -->
+
+    <div class="train-table-container">
+
+        <h2>
+            Operational Summary
+        </h2>
+
+        <br>
+
+        <div class="dashboard-cards">
+
+
+            <div class="dashboard-card">
+
+                <p>
+                    Train
+                </p>
+
+                <h3 id="summaryTrain">
+                    —
+                </h3>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <p>
+                    Speed
+                </p>
+
+                <h3 id="summarySpeed">
+                    —
+                </h3>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <p>
+                    Delay
+                </p>
+
+                <h3 id="summaryDelay">
+                    —
+                </h3>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <p>
+                    ML ETA
+                </p>
+
+                <h3 id="summaryETA">
+                    —
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <!-- ================= OPERATIONAL ALERTS ================= -->
+
+    <div class="train-table-container">
+
+        <h2>
+            Operational Alerts
+        </h2>
+
+        <br>
 
         <table class="train-table">
 
-            <tr>
+            <thead>
 
-                <th>Alert</th>
+                <tr>
 
-                <th>Location</th>
+                    <th>
+                        Alert
+                    </th>
 
-                <th>Severity</th>
+                    <th>
+                        Location
+                    </th>
 
-                <th>Action</th>
+                    <th>
+                        Severity
+                    </th>
 
-            </tr>
+                    <th>
+                        Action
+                    </th>
 
+                </tr>
 
-            <tr>
-
-                <td>
-                    Track Congestion
-                </td>
-
-                <td>
-                    Yeshwanthpur
-                </td>
-
-                <td>
-
-                    <span class="status warning">
-                        Medium
-                    </span>
-
-                </td>
-
-                <td>
-                    Monitor
-                </td>
-
-            </tr>
+            </thead>
 
 
-            <tr>
+            <tbody id="alertTableBody">
 
-                <td>
-                    Train Delay
-                </td>
+                <tr>
 
-                <td>
-                    Tumakuru
-                </td>
+                    <td colspan="4">
 
-                <td>
+                        No analysis performed yet.
 
-                    <span class="status delayed">
-                        High
-                    </span>
+                    </td>
 
-                </td>
+                </tr>
 
-                <td>
-                    Recalculate ETA
-                </td>
-
-            </tr>
-
-
-            <tr>
-
-                <td>
-                    Route Congestion
-                </td>
-
-                <td>
-                    Bengaluru
-                </td>
-
-                <td>
-
-                    <span class="status warning">
-                        Medium
-                    </span>
-
-                </td>
-
-                <td>
-                    Monitor
-                </td>
-
-            </tr>
+            </tbody>
 
         </table>
 
     </div>
 
+
 </div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="control-room.js"></script>
 
 
 </body>

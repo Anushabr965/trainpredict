@@ -5,7 +5,7 @@ router = APIRouter()
 
 trains = [
     {
-        "train_number": "12009",
+        "train_number": "12007",
         "train_name": "Shatabdi Express",
         "current_station": "Bengaluru City",
         "next_station": "Yeshwanthpur",
@@ -15,7 +15,7 @@ trains = [
         "eta": "10:42 AM"
     },
     {
-        "train_number": "12677",
+        "train_number": "12627",
         "train_name": "Karnataka Express",
         "current_station": "Mysuru Junction",
         "next_station": "Bengaluru City",

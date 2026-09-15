@@ -2,7 +2,7 @@ const API_URL = `${window.location.origin}/api`;
 
 const FALLBACK_TRAINS = [
     {
-        train_number: "12009",
+        train_number: "12007",
         train_name: "Shatabdi Express",
         current_station: "Bengaluru City",
         next_station: "Yeshwanthpur",
@@ -11,7 +11,7 @@ const FALLBACK_TRAINS = [
         predicted_eta: 18
     },
     {
-        train_number: "12677",
+        train_number: "12627",
         train_name: "Karnataka Express",
         current_station: "Mysuru Junction",
         next_station: "Bengaluru City",

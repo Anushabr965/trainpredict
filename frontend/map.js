@@ -14,7 +14,7 @@ let trainMarker;
 
 const trainRoutes = {
 
-    "12009": {
+    "12007": {
         name: "Shatabdi Express",
 
         stations: [
@@ -27,7 +27,7 @@ const trainRoutes = {
     },
 
 
-    "12677": {
+    "12627": {
         name: "Karnataka Express",
 
         stations: [
@@ -312,7 +312,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Show first train
-    showTrainRoute("12009");
+    // Updated from 12009 to 12007
+    showTrainRoute("12007");
 
 });
 
