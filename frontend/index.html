@@ -12,6 +12,16 @@
     <link rel="stylesheet" href="ui/ux.css">
     <link rel="stylesheet" href="style.css">
 
+    <!-- =====================================================
+         LEAFLET MAP CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
     <style>
 
         /* =====================================================
@@ -35,8 +45,6 @@
            DIFFERENT BACKGROUNDS
         ===================================================== */
 
-        /* HOME BACKGROUND */
-
         #home {
             min-height: 100vh;
 
@@ -49,8 +57,6 @@
                 center / cover fixed no-repeat;
         }
 
-
-        /* LIVE TRAINS BACKGROUND */
 
         #live-trains {
             min-height: 100vh;
@@ -68,8 +74,6 @@
         }
 
 
-        /* ANALYTICS BACKGROUND */
-
         #analytics {
             min-height: 100vh;
 
@@ -85,8 +89,6 @@
             padding-bottom: 80px;
         }
 
-
-        /* CONTROL ROOM BACKGROUND */
 
         #control-room {
             min-height: 100vh;
@@ -349,6 +351,22 @@
 
 
         /* =====================================================
+           TRAIN ROUTE MAP
+        ===================================================== */
+
+        #trainMap {
+            width: 100%;
+            height: 500px;
+
+            border-radius: 18px;
+
+            margin-top: 25px;
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
            SEARCH
         ===================================================== */
 
@@ -474,6 +492,11 @@
 
             .custom-page-title h1 {
                 font-size: 34px;
+            }
+
+
+            #trainMap {
+                height: 400px;
             }
 
         }
@@ -794,7 +817,7 @@
     <footer>
 
         <p>
-            © 2026 RailPredict | Smart Railway ETA Forecasting System
+            ©️ 2026 RailPredict | Smart Railway ETA Forecasting System
         </p>
 
     </footer>
@@ -964,6 +987,49 @@
             </table>
 
         </div>
+
+
+
+        <!-- =====================================================
+             TRAIN ROUTE MAP
+        ====================================================== -->
+
+        <div class="custom-table-container">
+
+            <h2>
+                Train Route Map
+            </h2>
+
+
+            <p>
+                select the train to view its current route and upcoming stations.
+            </p>
+            <!-- Train selector -->
+            <select id="mapTrainSelector" onchange="showTrainRoute(this.value)"
+                style="
+                flex: 1;
+                min-width: 250px;
+                padding: 15px 18px;
+                border-radius: 10px;
+                border: 1px solid rgba(255,255,255,0.18);
+                background: #102033;
+                color: white;
+                outline: none;
+                font-size: 15px;
+                "
+                >
+        
+                <option value="12627">Karnataka Express</option>
+                <option value="12007">Shatabdi Express</option>
+            </select>
+
+            
+         <!--map-->
+
+            <div id="trainMap"></div>
+
+        </div>
+
 
     </div>
 
@@ -1557,6 +1623,20 @@
 <script src="main.js"></script>
 
 <script src="dashboard.js"></script>
+
+
+<!-- =====================================================
+     LEAFLET MAP JAVASCRIPT
+===================================================== -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<!-- Train Route Map -->
+
+<script src="map.js"></script>
 
 
 <script>
