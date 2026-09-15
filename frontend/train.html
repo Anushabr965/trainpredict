@@ -5,19 +5,46 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Train Details | RailPredict</title>
 
-    <link rel="stylesheet"
-          href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Leaflet Map CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           TRAIN ROUTE MAP
+        ===================================================== */
+
+        #trainMap {
+            width: 100%;
+            height: 500px;
+
+            border-radius: 18px;
+
+            margin-top: 25px;
+
+            overflow: hidden;
+        }
+
+    </style>
 
 </head>
 
 
 <body>
 
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
 
 <nav class="navbar">
 
@@ -27,7 +54,9 @@
 
     <div class="nav-links">
 
-        <a href="index.html">Home</a>
+        <a href="index.html">
+            Home
+        </a>
 
         <a href="dashboard.html">
             Live Trains
@@ -46,6 +75,10 @@
 </nav>
 
 
+<!-- =========================================================
+     TRAIN DETAILS
+========================================================= -->
+
 <div class="dashboard-container">
 
     <p class="tag">
@@ -60,6 +93,10 @@
         Karnataka Express
     </p>
 
+
+    <!-- =====================================================
+         TRAIN INFORMATION CARDS
+    ====================================================== -->
 
     <div class="dashboard-cards">
 
@@ -101,54 +138,162 @@
     </div>
 
 
+    <!-- =====================================================
+         ETA PREDICTION TABLE
+    ====================================================== -->
+
     <div class="train-table-container">
 
-        <h2>ETA Prediction</h2>
+        <h2>
+            ETA Prediction
+        </h2>
 
         <br>
 
         <table class="train-table">
 
             <tr>
-                <th>Station</th>
-                <th>Scheduled Arrival</th>
-                <th>Predicted Arrival</th>
-                <th>Difference</th>
+
+                <th>
+                    Station
+                </th>
+
+                <th>
+                    Scheduled Arrival
+                </th>
+
+                <th>
+                    Predicted Arrival
+                </th>
+
+                <th>
+                    Difference
+                </th>
+
             </tr>
 
-            <tr>
-                <td>Yeshwanthpur</td>
-                <td>10:30 AM</td>
-                <td>10:34 AM</td>
-                <td>+4 min</td>
-            </tr>
 
             <tr>
-                <td>Tumakuru</td>
-                <td>11:20 AM</td>
-                <td>11:27 AM</td>
-                <td>+7 min</td>
+
+                <td>
+                    Yeshwanthpur
+                </td>
+
+                <td>
+                    10:30 AM
+                </td>
+
+                <td>
+                    10:34 AM
+                </td>
+
+                <td>
+                    +4 min
+                </td>
+
             </tr>
 
-            <tr>
-                <td>Arsikere</td>
-                <td>12:35 PM</td>
-                <td>12:41 PM</td>
-                <td>+6 min</td>
-            </tr>
 
             <tr>
-                <td>Hubballi</td>
-                <td>3:20 PM</td>
-                <td>3:26 PM</td>
-                <td>+6 min</td>
+
+                <td>
+                    Tumakuru
+                </td>
+
+                <td>
+                    11:20 AM
+                </td>
+
+                <td>
+                    11:27 AM
+                </td>
+
+                <td>
+                    +7 min
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    Arsikere
+                </td>
+
+                <td>
+                    12:35 PM
+                </td>
+
+                <td>
+                    12:41 PM
+                </td>
+
+                <td>
+                    +6 min
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    Hubballi
+                </td>
+
+                <td>
+                    3:20 PM
+                </td>
+
+                <td>
+                    3:26 PM
+                </td>
+
+                <td>
+                    +6 min
+                </td>
+
             </tr>
 
         </table>
 
     </div>
 
+
+    <!-- =====================================================
+         TRAIN ROUTE MAP
+    ====================================================== -->
+
+    <div class="train-table-container">
+
+        <h2>
+            Train Route Map
+        </h2>
+
+        <p>
+            Current route and upcoming stations for Karnataka Express.
+        </p>
+
+        <div id="trainMap"></div>
+
+    </div>
+
 </div>
+
+
+<!-- =========================================================
+     LEAFLET JAVASCRIPT
+========================================================= -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+
+<!-- Your existing map.js -->
+
+<script src="map.js"></script>
 
 
 </body>
