@@ -1,60 +1,576 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>RailPredict | Dynamic Train ETA</title>
 
     <link rel="stylesheet" href="ui/ux.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =====================================================
+           GENERAL
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+        }
+
+
+        /* =====================================================
+           DIFFERENT BACKGROUNDS
+        ===================================================== */
+
+        /* HOME BACKGROUND */
+
+        #home {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    rgba(3, 12, 25, 0.78),
+                    rgba(3, 12, 25, 0.88)
+                ),
+                url("https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=2000&q=85")
+                center / cover fixed no-repeat;
+        }
+
+
+        /* LIVE TRAINS BACKGROUND */
+
+        #live-trains {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    rgba(2, 25, 35, 0.84),
+                    rgba(2, 15, 25, 0.92)
+                ),
+                url("https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=2000&q=85")
+                center / cover fixed no-repeat;
+
+            padding-top: 100px;
+            padding-bottom: 80px;
+        }
+
+
+        /* ANALYTICS BACKGROUND */
+
+        #analytics {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    rgba(15, 10, 35, 0.86),
+                    rgba(5, 10, 25, 0.93)
+                ),
+                url("https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=2000&q=85")
+                center / cover fixed no-repeat;
+
+            padding-top: 100px;
+            padding-bottom: 80px;
+        }
+
+
+        /* CONTROL ROOM BACKGROUND */
+
+        #control-room {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    rgba(5, 20, 30, 0.86),
+                    rgba(2, 10, 20, 0.94)
+                ),
+                url("https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=2000&q=85")
+                center / cover fixed no-repeat;
+
+            padding-top: 100px;
+            padding-bottom: 80px;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            z-index: 9999;
+
+            backdrop-filter: blur(14px);
+
+            background: rgba(3, 10, 20, 0.78);
+
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+
+        .nav-links a {
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           SECTION CONTAINER
+        ===================================================== */
+
+        .page-section {
+            position: relative;
+        }
+
+
+        .section-inner {
+            width: 90%;
+            max-width: 1400px;
+
+            margin: auto;
+        }
+
+
+        /* =====================================================
+           PAGE TITLES
+        ===================================================== */
+
+        .custom-page-title {
+            text-align: center;
+
+            margin-bottom: 45px;
+
+            color: white;
+        }
+
+
+        .custom-page-title .tag {
+            letter-spacing: 3px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #66d9ff;
+
+            margin-bottom: 10px;
+        }
+
+
+        .custom-page-title h1 {
+            font-size: clamp(32px, 5vw, 58px);
+
+            margin: 0 0 15px;
+
+            font-weight: 800;
+        }
+
+
+        .custom-page-title p {
+            font-size: 17px;
+
+            opacity: 0.85;
+
+            margin: 0 auto;
+
+            max-width: 700px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           DASHBOARD CARDS
+        ===================================================== */
+
+        .custom-dashboard-cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .custom-dashboard-card {
+            padding: 28px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255,255,255,0.09);
+
+            backdrop-filter: blur(15px);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            color: white;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.25);
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease;
+        }
+
+
+        .custom-dashboard-card:hover {
+            transform: translateY(-6px);
+
+            background:
+                rgba(255,255,255,0.14);
+        }
+
+
+        .custom-dashboard-card p {
+            margin: 0 0 10px;
+
+            opacity: 0.75;
+
+            font-size: 14px;
+        }
+
+
+        .custom-dashboard-card h3 {
+            margin: 0;
+
+            font-size: 32px;
+
+            color: #ffffff;
+        }
+
+
+        .custom-dashboard-card .green {
+            color: #4ade80;
+        }
+
+
+        /* =====================================================
+           TABLE CONTAINER
+        ===================================================== */
+
+        .custom-table-container {
+            width: 100%;
+
+            overflow-x: auto;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(4, 12, 25, 0.78);
+
+            backdrop-filter: blur(16px);
+
+            border:
+                1px solid rgba(255,255,255,0.14);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.3);
+
+            color: white;
+
+            margin-bottom: 30px;
+        }
+
+
+        .custom-table-container h2 {
+            margin-top: 0;
+
+            font-size: 25px;
+        }
+
+
+        .custom-table-container p {
+            line-height: 1.7;
+
+            opacity: 0.85;
+        }
+
+
+        .custom-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 650px;
+        }
+
+
+        .custom-table th {
+            text-align: left;
+
+            padding: 17px 14px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            font-size: 14px;
+
+            color: #8fe5ff;
+        }
+
+
+        .custom-table td {
+            padding: 16px 14px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
+
+            color: rgba(255,255,255,0.88);
+        }
+
+
+        .custom-table tr:hover td {
+            background:
+                rgba(255,255,255,0.04);
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        .custom-search {
+            display: flex;
+
+            gap: 12px;
+
+            margin-bottom: 30px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .custom-search input {
+            flex: 1;
+
+            min-width: 250px;
+
+            padding: 15px 18px;
+
+            border-radius: 10px;
+
+            border:
+                1px solid rgba(255,255,255,0.18);
+
+            background:
+                rgba(255,255,255,0.08);
+
+            color: white;
+
+            outline: none;
+        }
+
+
+        .custom-search input::placeholder {
+            color: rgba(255,255,255,0.55);
+        }
+
+
+        .custom-search button {
+            padding: 14px 22px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-weight: 700;
+
+            background: #38bdf8;
+
+            color: #06111c;
+
+            transition: 0.25s;
+        }
+
+
+        .custom-search button:hover {
+            transform: translateY(-2px);
+
+            opacity: 0.9;
+        }
+
+
+        /* =====================================================
+           STATUS
+        ===================================================== */
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .status.warning {
+            background: rgba(250, 204, 21, 0.15);
+
+            color: #fde047;
+        }
+
+
+        .status.delayed {
+            background: rgba(248, 113, 113, 0.15);
+
+            color: #f87171;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .custom-dashboard-cards {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .custom-dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+
+
+            .custom-table-container {
+                padding: 20px;
+            }
+
+
+            .custom-page-title h1 {
+                font-size: 34px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar">
 
-        <div class="logo">
-            🚆 RailPredict
-        </div>
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
 
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="dashboard.html">Live Trains</a>
-            <a href="analytics.html">Analytics</a>
-            <a href="control-room.html">Control Room</a>
-        </div>
+<nav class="navbar">
 
-    </nav>
+    <div class="logo">
+        🚆 RailPredict
+    </div>
 
 
-    <!-- Hero Section -->
+    <div class="nav-links">
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#live-trains">
+            Live Trains
+        </a>
+
+        <a href="#analytics">
+            Analytics
+        </a>
+
+        <a href="#control-room">
+            Control Room
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HOME
+========================================================= -->
+
+<section id="home" class="page-section">
 
     <section class="hero">
 
         <div class="hero-content">
 
-            <p class="tag">SMART RAILWAY ETA SYSTEM</p>
+            <p class="tag">
+                SMART RAILWAY ETA SYSTEM
+            </p>
+
 
             <h1>
+
                 Dynamic Forecast of
-                <span>Train ETA</span>
+
+                <span>
+                    Train ETA
+                </span>
+
             </h1>
 
+
             <p class="hero-description">
+
                 Predict accurate train arrival times using live train
                 information, historical delays, route conditions and
                 machine learning.
+
             </p>
+
 
             <div class="hero-buttons">
 
-                <a href="dashboard.html" class="btn primary-btn">
+                <a href="#live-trains"
+                   class="btn primary-btn">
+
                     View Live Trains
+
                 </a>
 
-                <a href="analytics.html" class="btn secondary-btn">
+
+                <a href="#analytics"
+                   class="btn secondary-btn">
+
                     View Analytics
+
                 </a>
 
             </div>
@@ -68,23 +584,45 @@
                 🚆
             </div>
 
-            <h3>Dynamic ETA Prediction</h3>
+
+            <h3>
+                Dynamic ETA Prediction
+            </h3>
+
 
             <p>
+
                 Continuously updated arrival predictions
                 based on changing railway conditions.
+
             </p>
+
 
             <div class="prediction">
 
                 <div>
-                    <small>Next Station</small>
-                    <strong>Yeshwanthpur</strong>
+
+                    <small>
+                        Next Station
+                    </small>
+
+                    <strong>
+                        Yeshwanthpur
+                    </strong>
+
                 </div>
 
+
                 <div>
-                    <small>Predicted ETA</small>
-                    <strong class="green">10:42 AM</strong>
+
+                    <small>
+                        Predicted ETA
+                    </small>
+
+                    <strong class="green">
+                        10:42 AM
+                    </strong>
+
                 </div>
 
             </div>
@@ -94,29 +632,39 @@
     </section>
 
 
-    <!-- Features -->
-
     <section class="section">
 
-        <h2>How RailPredict Works</h2>
+        <h2>
+            How RailPredict Works
+        </h2>
+
 
         <p class="section-description">
+
             Our system combines railway data and machine learning
             to dynamically forecast train arrival times.
+
         </p>
 
 
         <div class="feature-grid">
 
+
             <div class="feature-card">
 
-                <div class="feature-icon">📍</div>
+                <div class="feature-icon">
+                    📍
+                </div>
 
-                <h3>Live Train Data</h3>
+                <h3>
+                    Live Train Data
+                </h3>
 
                 <p>
+
                     Monitor current train position, speed,
                     delay and route information.
+
                 </p>
 
             </div>
@@ -124,13 +672,19 @@
 
             <div class="feature-card">
 
-                <div class="feature-icon">🤖</div>
+                <div class="feature-icon">
+                    🤖
+                </div>
 
-                <h3>ML Prediction</h3>
+                <h3>
+                    ML Prediction
+                </h3>
 
                 <p>
+
                     Machine learning models analyse historical
                     and current railway data.
+
                 </p>
 
             </div>
@@ -138,13 +692,19 @@
 
             <div class="feature-card">
 
-                <div class="feature-icon">⏱️</div>
+                <div class="feature-icon">
+                    ⏱️
+                </div>
 
-                <h3>Dynamic ETA</h3>
+                <h3>
+                    Dynamic ETA
+                </h3>
 
                 <p>
+
                     ETA is continuously recalculated when
                     railway conditions change.
+
                 </p>
 
             </div>
@@ -152,44 +712,80 @@
 
             <div class="feature-card">
 
-                <div class="feature-icon">🚨</div>
+                <div class="feature-icon">
+                    🚨
+                </div>
 
-                <h3>Disruption Alerts</h3>
+                <h3>
+                    Disruption Alerts
+                </h3>
 
                 <p>
+
                     Detect delays, congestion and other
                     operational disruptions.
+
                 </p>
 
             </div>
+
 
         </div>
 
     </section>
 
 
-    <!-- Statistics -->
-
     <section class="stats-section">
 
         <div class="stat">
-            <h2>150+</h2>
-            <p>Trains Monitored</p>
+
+            <h2>
+                150+
+            </h2>
+
+            <p>
+                Trains Monitored
+            </p>
+
         </div>
 
-        <div class="stat">
-            <h2>95%</h2>
-            <p>Prediction Accuracy</p>
-        </div>
 
         <div class="stat">
-            <h2>24/7</h2>
-            <p>Monitoring</p>
+
+            <h2>
+                95%
+            </h2>
+
+            <p>
+                Prediction Accuracy
+            </p>
+
         </div>
 
+
         <div class="stat">
-            <h2>Real-Time</h2>
-            <p>ETA Updates</p>
+
+            <h2>
+                24/7
+            </h2>
+
+            <p>
+                Monitoring
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>
+                Real-Time
+            </h2>
+
+            <p>
+                ETA Updates
+            </p>
+
         </div>
 
     </section>
@@ -203,8 +799,833 @@
 
     </footer>
 
+</section>
 
-    <script src="main.js"></script>
+
+
+<!-- =========================================================
+     LIVE TRAINS
+========================================================= -->
+
+<section id="live-trains" class="page-section">
+
+    <div class="section-inner">
+
+
+        <div class="custom-page-title">
+
+            <p class="tag">
+                LIVE MONITORING
+            </p>
+
+            <h1>
+                Train ETA Dashboard
+            </h1>
+
+            <p>
+                Monitor train movement and dynamically predicted
+                arrival times.
+            </p>
+
+        </div>
+
+
+
+        <div class="custom-dashboard-cards">
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Active Trains
+                </p>
+
+                <h3 id="activeTrains">
+                    128
+                </h3>
+
+            </div>
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    On Time
+                </p>
+
+                <h3 id="onTime">
+                    94
+                </h3>
+
+            </div>
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Delayed
+                </p>
+
+                <h3 id="delayed">
+                    26
+                </h3>
+
+            </div>
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Critical Alerts
+                </p>
+
+                <h3 id="alerts">
+                    8
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="custom-search">
+
+            <input
+                type="text"
+                id="trainSearch"
+                placeholder="Search train number or train name..."
+            >
+
+
+            <button onclick="searchTrain()">
+                Search
+            </button>
+
+
+            <button onclick="loadTrains()">
+                Show All
+            </button>
+
+        </div>
+
+
+
+        <div class="custom-table-container">
+
+            <h2>
+                Live Train Status
+            </h2>
+
+
+            <table class="custom-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Train Number
+                        </th>
+
+                        <th>
+                            Train Name
+                        </th>
+
+                        <th>
+                            Current Station
+                        </th>
+
+                        <th>
+                            Next Station
+                        </th>
+
+                        <th>
+                            Speed
+                        </th>
+
+                        <th>
+                            Delay
+                        </th>
+
+                        <th>
+                            ML Predicted ETA
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="trainTableBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ANALYTICS
+========================================================= -->
+
+<section id="analytics" class="page-section">
+
+    <div class="section-inner">
+
+
+        <div class="custom-page-title">
+
+            <p class="tag">
+                DATA ANALYTICS
+            </p>
+
+            <h1>
+                ETA Prediction Analytics
+            </h1>
+
+            <p>
+                Analyse train delays and prediction performance.
+            </p>
+
+        </div>
+
+
+
+        <div class="custom-dashboard-cards">
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Average Delay
+                </p>
+
+                <h3>
+                    8.4 min
+                </h3>
+
+            </div>
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Prediction Accuracy
+                </p>
+
+                <h3>
+                    94.7%
+                </h3>
+
+            </div>
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Predictions Today
+                </p>
+
+                <h3>
+                    4,281
+                </h3>
+
+            </div>
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Delay Reduction
+                </p>
+
+                <h3>
+                    18%
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="custom-table-container">
+
+            <h2>
+                Major Delay Factors
+            </h2>
+
+
+            <br>
+
+
+            <table class="custom-table">
+
+                <tr>
+
+                    <th>
+                        Factor
+                    </th>
+
+                    <th>
+                        Impact
+                    </th>
+
+                    <th>
+                        Frequency
+                    </th>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Track Congestion
+                    </td>
+
+                    <td>
+                        High
+                    </td>
+
+                    <td>
+                        32%
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Previous Station Delay
+                    </td>
+
+                    <td>
+                        High
+                    </td>
+
+                    <td>
+                        28%
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Weather Conditions
+                    </td>
+
+                    <td>
+                        Medium
+                    </td>
+
+                    <td>
+                        16%
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Station Congestion
+                    </td>
+
+                    <td>
+                        Medium
+                    </td>
+
+                    <td>
+                        14%
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+
+        <div class="custom-table-container">
+
+            <h2>
+                ML Model Performance Comparison
+            </h2>
+
+
+            <br>
+
+
+            <p>
+
+                Comparison of different machine learning models
+                for train ETA prediction.
+
+            </p>
+
+
+            <br>
+
+
+            <table class="custom-table">
+
+                <tr>
+
+                    <th>
+                        Model
+                    </th>
+
+                    <th>
+                        MAE
+                    </th>
+
+                    <th>
+                        RMSE
+                    </th>
+
+                    <th>
+                        Accuracy ±10 min
+                    </th>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Schedule-based Baseline
+                    </td>
+
+                    <td>
+                        To be measured
+                    </td>
+
+                    <td>
+                        To be measured
+                    </td>
+
+                    <td>
+                        To be measured
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            Linear Regression
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            0.81 min
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            1.07 min
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            100%
+                        </strong>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Random Forest
+                    </td>
+
+                    <td>
+                        5.73 min
+                    </td>
+
+                    <td>
+                        8.17 min
+                    </td>
+
+                    <td>
+                        75%
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Gradient Boosting
+                    </td>
+
+                    <td>
+                        3.73 min
+                    </td>
+
+                    <td>
+                        5.33 min
+                    </td>
+
+                    <td>
+                        100%
+                    </td>
+
+                </tr>
+
+            </table>
+
+
+            <br>
+
+
+            <p>
+
+                <strong>
+                    Best Model:
+                </strong>
+
+                Linear Regression
+
+            </p>
+
+
+            <br>
+
+
+            <p>
+
+                On the current prototype dataset,
+                Linear Regression achieved the lowest
+                MAE of 0.81 minutes.
+
+            </p>
+
+
+            <br>
+
+
+            <p>
+
+                <small>
+
+                    Note: These are preliminary results
+                    obtained using a simulated prototype
+                    dataset. The model will be retrained
+                    and validated using larger real-world
+                    railway operational datasets.
+
+                </small>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CONTROL ROOM
+========================================================= -->
+
+<section id="control-room" class="page-section">
+
+    <div class="section-inner">
+
+
+        <div class="custom-page-title">
+
+            <p class="tag">
+                RAILWAY CONTROL ROOM
+            </p>
+
+            <h1>
+                Network Monitoring
+            </h1>
+
+            <p>
+                Monitor railway operations and identify
+                potential disruptions.
+            </p>
+
+        </div>
+
+
+
+        <div class="custom-dashboard-cards">
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Network Status
+                </p>
+
+                <h3 class="green">
+                    Normal
+                </h3>
+
+            </div>
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Active Alerts
+                </p>
+
+                <h3>
+                    8
+                </h3>
+
+            </div>
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Delayed Trains
+                </p>
+
+                <h3>
+                    26
+                </h3>
+
+            </div>
+
+
+            <div class="custom-dashboard-card">
+
+                <p>
+                    Critical Sections
+                </p>
+
+                <h3>
+                    3
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="custom-table-container">
+
+            <h2>
+                Operational Alerts
+            </h2>
+
+
+            <br>
+
+
+            <table class="custom-table">
+
+                <tr>
+
+                    <th>
+                        Alert
+                    </th>
+
+                    <th>
+                        Location
+                    </th>
+
+                    <th>
+                        Severity
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Track Congestion
+                    </td>
+
+                    <td>
+                        Yeshwanthpur
+                    </td>
+
+                    <td>
+
+                        <span class="status warning">
+                            Medium
+                        </span>
+
+                    </td>
+
+                    <td>
+                        Monitor
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Train Delay
+                    </td>
+
+                    <td>
+                        Tumakuru
+                    </td>
+
+                    <td>
+
+                        <span class="status delayed">
+                            High
+                        </span>
+
+                    </td>
+
+                    <td>
+                        Recalculate ETA
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Route Congestion
+                    </td>
+
+                    <td>
+                        Bengaluru
+                    </td>
+
+                    <td>
+
+                        <span class="status warning">
+                            Medium
+                        </span>
+
+                    </td>
+
+                    <td>
+                        Monitor
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="main.js"></script>
+
+<script src="dashboard.js"></script>
+
+
+<script>
+
+    /*
+       Navigation is handled inside index.html.
+       The other HTML files do not need to be changed.
+    */
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+
+        link.addEventListener('click', function(event) {
+
+            const target = this.getAttribute('href');
+
+            if (target.startsWith('#')) {
+
+                event.preventDefault();
+
+                const section =
+                    document.querySelector(target);
+
+                if (section) {
+
+                    section.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                }
+
+            }
+
+        });
+
+    });
+
+
+    /*
+       Make the page start at the correct section
+       when a #link is used.
+    */
+
+    window.addEventListener('load', function() {
+
+        if (window.location.hash) {
+
+            const section =
+                document.querySelector(window.location.hash);
+
+            if (section) {
+
+                setTimeout(() => {
+
+                    section.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                }, 100);
+
+            }
+
+        }
+
+    });
+
+</script>
+
 
 </body>
+
 </html>
+

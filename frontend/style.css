@@ -200,6 +200,7 @@ body {
 .section h2 {
     font-size: 35px;
     margin-bottom: 15px;
+    color: white !important;
 }
 
 .section-description {
